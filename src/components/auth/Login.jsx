@@ -64,7 +64,7 @@ function Login() {
           {!isLoading ? "Log in" : <div className="loader" />}
         </Button>
         <Button color="orange" onClick={() => navigate("/signup")}>
-          Signup
+          Sign up
         </Button>
       </div>
     </form>

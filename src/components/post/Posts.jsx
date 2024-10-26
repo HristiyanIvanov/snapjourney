@@ -6,7 +6,7 @@ import toast from "react-hot-toast";
 import { useGetInteractions } from "./useGetInteractions";
 import { countLikes } from "../../utils/countLikes";
 
-function Posts() {
+function Posts({ refetch }) {
   const { isLoading: isLoadingPosts, posts, error: errorPosts } = useGetPosts();
   const { isLoading: isLoadingUsers, users, error: errorUsers } = useGetUsers();
   const {
@@ -26,22 +26,25 @@ function Posts() {
 
   return (
     <div className="flex flex-col items-center gap-4">
-      {posts?.data?.map((post) => (
-        <Post
-          key={post.id}
-          name={
-            users?.data?.find((user) => user.id === post.user_id)?.full_name
-          }
-          location={post.location}
-          time_ago={timeAgo(post.created_at)}
-          profile_pic={
-            users?.data?.find((user) => user.id === post.user_id)?.avatar_url
-          }
-          description={post.description}
-          postImage={post.photo_url}
-          likes={countLikes(post.id, interactions?.data)}
-        />
-      ))}
+      {posts?.data
+        ?.slice()
+        .reverse()
+        .map((post) => (
+          <Post
+            key={post.id}
+            name={
+              users?.data?.find((user) => user.id === post.user_id)?.full_name
+            }
+            location={post.location}
+            time_ago={timeAgo(post.created_at)}
+            profile_pic={
+              users?.data?.find((user) => user.id === post.user_id)?.avatar_url
+            }
+            description={post.description}
+            postImage={post.photo_url}
+            likes={countLikes(post.id, interactions?.data)}
+          />
+        ))}
     </div>
   );
 }

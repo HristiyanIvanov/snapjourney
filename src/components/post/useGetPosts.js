@@ -6,9 +6,10 @@ export function useGetPosts() {
     isLoading,
     data: posts,
     error,
+    refetch,
   } = useQuery({
     queryKey: ["posts"],
     queryFn: () => getPosts(),
   });
-  return { isLoading, posts, error };
+  return { isLoading, posts, error, refetch };
 }

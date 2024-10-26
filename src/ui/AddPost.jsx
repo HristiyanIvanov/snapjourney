@@ -1,7 +1,13 @@
 import { GoFileMedia, GoLocation } from "react-icons/go";
 import Button from "./Button";
 
-function AddPost({ openImageModal, openLocationModal, createPost }) {
+function AddPost({
+  openImageModal,
+  openLocationModal,
+  setDescription,
+  createPost,
+  isLoading,
+}) {
   return (
     <form className="flex size-4/5 flex-col gap-5 rounded-xl border border-gray-300 bg-gray-50 px-5 py-6 font-light text-gray-600">
       <h1 className="text-2xl font-light">Share your memories</h1>
@@ -9,6 +15,7 @@ function AddPost({ openImageModal, openLocationModal, createPost }) {
         className="rounded-lg border border-gray-200 p-2 outline-teal-400"
         type="number"
         id="description"
+        onChange={(e) => setDescription(e.target.value)}
         placeholder="What do you want to share?"
       />
       <div className="flex flex-row items-center justify-between gap-2">
@@ -31,7 +38,11 @@ function AddPost({ openImageModal, openLocationModal, createPost }) {
           </div>
         </div>
         <div className="">
-          <Button onClick={createPost}>Add Post</Button>
+          {!isLoading ? (
+            <Button onClick={createPost}>Add Post</Button>
+          ) : (
+            <div className="loader" />
+          )}
         </div>
       </div>
     </form>
