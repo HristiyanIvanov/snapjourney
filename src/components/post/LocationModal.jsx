@@ -25,7 +25,6 @@ function LocationModal({
             lat: latLng.lat(),
             lng: latLng.lng(),
           });
-          console.log({ lat: latLng.lat(), lng: latLng.lng() });
         } else {
           toast.error("Geocode failed: " + status);
         }

@@ -1,8 +1,13 @@
 import { useState } from "react";
 import Modal from "../../ui/Modal";
 import Button from "../../ui/Button";
-
-function ImageModal({ isImageModalOpen, closeImageModal, image, setImage }) {
+function ImageModal({
+  isImageModalOpen,
+  closeImageModal,
+  image,
+  setImage,
+  setFile,
+}) {
   const [dragActive, setDragActive] = useState(false);
   const handleDragOver = (e) => {
     e.preventDefault();
@@ -17,6 +22,7 @@ function ImageModal({ isImageModalOpen, closeImageModal, image, setImage }) {
   };
   const handleImageUpload = (file) => {
     setImage(URL.createObjectURL(file));
+    setFile(file);
   };
 
   const handleDrop = (e) => {

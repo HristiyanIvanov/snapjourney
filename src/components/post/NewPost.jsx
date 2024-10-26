@@ -7,8 +7,7 @@ import LocationModal from "./LocationModal";
 import { useUser } from "../auth/useUser";
 import { useCreatePost } from "./useCreatePost";
 import { uploadImage } from "../../services/uploadImages";
-import { useMutation } from "@tanstack/react-query";
-import { useGetPosts } from "./useGetPosts";
+
 function NewPost({ refetchPosts }) {
   const { user, isLoading: userLoading } = useUser();
   const { makeNewPost, isLoading } = useCreatePost();
@@ -17,27 +16,9 @@ function NewPost({ refetchPosts }) {
   const [isLocationModalOpen, setIsLocationModalOpen] = useState(false);
   const [isImageModalOpen, setIsImageModalOpen] = useState(false);
   const [address, setAddress] = useState("");
+  const [file, setFile] = useState(null);
   const [coordinates, setCoordinates] = useState({ lat: null, lng: null });
   const { data: google, error } = useLoadGoogleMaps();
-  const mutation = useMutation({
-    mutationFn: async (image) => {
-      const imageUrl = await uploadImage(image);
-      setImage(imageUrl);
-      return imageUrl;
-    },
-    onSuccess: () => {
-      const postData = {
-        user_id: user.id,
-        description,
-        photo_url: image,
-        location: address,
-      };
-      makeNewPost(postData);
-    },
-    onError: (error) => {
-      toast.error(`Image upload failed: ${error.message}`);
-    },
-  });
   const closeImageModal = () => setIsImageModalOpen(false);
   const closeLocationModal = () => setIsLocationModalOpen(false);
   const openImageModal = (e) => {
@@ -49,7 +30,7 @@ function NewPost({ refetchPosts }) {
     setIsLocationModalOpen(true);
   };
 
-  const createPost = (e) => {
+  const createPost = async (e) => {
     e.preventDefault();
     if (userLoading || !user) {
       toast.error("User is not authenticated");
@@ -71,14 +52,22 @@ function NewPost({ refetchPosts }) {
       return;
     }
 
-    mutation.mutate(image, {
-      onSuccess: () => {
-        refetchPosts();
-        setImage(null);
-        setDescription("");
-        setAddress("");
-      },
+    makeNewPost({
+      user_id: user.id,
+      photo_url:
+        import.meta.env.VITE_SUPABASE_BUCKET_URL +
+        (await uploadImage(file)).fullPath,
+      description: description,
+      location: address,
     });
+    refetchPosts();
+    toast.success("Post created successfully");
+    setDescription("");
+    setAddress("");
+    setFile(null);
+    setCoordinates({ lat: null, lng: null });
+    closeImageModal();
+    closeLocationModal();
   };
 
   if (error) return toast.error(error.message);
@@ -96,6 +85,7 @@ function NewPost({ refetchPosts }) {
         isImageModalOpen={isImageModalOpen}
         closeImageModal={closeImageModal}
         image={image}
+        setFile={setFile}
         setImage={setImage}
       />
       <LocationModal
