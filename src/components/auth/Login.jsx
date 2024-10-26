@@ -63,12 +63,9 @@ function Login() {
         <Button type="submit">
           {!isLoading ? "Log in" : <div className="loader" />}
         </Button>
-        <button
-          className="w-28 rounded-lg border border-orange-500 bg-orange-300 p-2 transition-all duration-300 hover:bg-orange-400"
-          onClick={() => navigate("/signup")}
-        >
+        <Button color="orange" onClick={() => navigate("/signup")}>
           Signup
-        </button>
+        </Button>
       </div>
     </form>
   );

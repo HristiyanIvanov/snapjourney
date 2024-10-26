@@ -1,11 +1,12 @@
 import { useState } from "react";
 import Button from "../../ui/Button";
 import { useForgotPassword } from "./useForgotPassword";
+import { useNavigate } from "react-router-dom";
 
 function ForgotPassword() {
   const [email, setEmail] = useState("");
   const { forgotPassword, isLoading } = useForgotPassword();
-
+  const navigate = useNavigate();
   function handleSubmit(e) {
     e.preventDefault();
     if (!email) return;
@@ -31,8 +32,11 @@ function ForgotPassword() {
         />
       </div>
       <div className="flex flex-row items-center justify-between">
-        <Button type="submit">
-          {!isLoading ? "Send Reset Email" : <div className="loader" />}
+        <Button color="teal" type="submit">
+          {!isLoading ? "Send Email" : <div className="loader" />}
+        </Button>
+        <Button color="gray" type="button" onClick={() => navigate(-1)}>
+          Back
         </Button>
       </div>
     </form>

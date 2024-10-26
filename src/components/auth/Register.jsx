@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useSignup } from "./useSignup";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
+import Button from "../../ui/Button";
 
 function Register() {
   const [email, setEmail] = useState("");
@@ -8,7 +10,7 @@ function Register() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [fullName, setFullName] = useState("");
   const { signup, isLoading } = useSignup();
-
+  const navigate = useNavigate();
   function handleSubmit(e) {
     e.preventDefault();
     if (!email || !password || !confirmPassword || !fullName) return;
@@ -81,12 +83,12 @@ function Register() {
         />
       </div>
       <div className="flex flex-row items-center justify-between">
-        <button
-          className="w-28 rounded-lg border border-orange-500 bg-orange-300 p-2 transition-all duration-300 hover:bg-orange-400"
-          type="submit"
-        >
+        <Button color="teal" type="submit">
           {!isLoading ? "Sign up" : <div className="loader" />}
-        </button>
+        </Button>
+        <Button color="gray" type="button" onClick={() => navigate(-1)}>
+          Back
+        </Button>
       </div>
     </form>
   );

@@ -46,7 +46,7 @@ function ImageModal({ isImageModalOpen, closeImageModal, image, setImage }) {
     >
       <div className="py-6 md:w-96">
         <div
-          className={`flex cursor-pointer items-center justify-center rounded-lg border-2 border-dashed p-6 text-center transition-colors ${dragActive ? "border-blue-500 bg-blue-50" : "border-gray-300 bg-gray-50"}`}
+          className={`flex cursor-pointer items-center justify-center rounded-lg border-2 border-dashed p-6 text-center transition-colors ${dragActive ? "border-teal-500 bg-blue-50" : "border-gray-300 bg-gray-50"}`}
           onDragOver={handleDragOver}
           onDragLeave={handleDragLeave}
           onDrop={handleDrop}
@@ -74,12 +74,9 @@ function ImageModal({ isImageModalOpen, closeImageModal, image, setImage }) {
         />
       </div>
       <div className="flex flex-row justify-end gap-2">
-        <button
-          className="w-24 rounded-lg border border-red-500 bg-red-300 p-2 font-light transition-all duration-300 hover:bg-red-400"
-          onClick={clearImage}
-        >
+        <Button color="red" onClick={clearImage}>
           Clear
-        </button>
+        </Button>
         <Button onClick={closeImageModal}>Upload</Button>
       </div>
     </Modal>
