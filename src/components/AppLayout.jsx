@@ -1,5 +1,5 @@
 import Container from "./Container";
-import Sidebar from "../ui/sidebar";
+import Sidebar from "../ui/Sidebar";
 
 function AppLayout() {
   return (
