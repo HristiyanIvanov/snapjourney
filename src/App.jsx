@@ -3,12 +3,13 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { Toaster } from "react-hot-toast";
 import AppLayout from "./components/AppLayout.jsx";
 import { Navigate, Route, Routes } from "react-router-dom";
-import RegisterForm from "./components/auth/RegisterForm.jsx";
-import LoginForm from "./components/auth/LoginForm.jsx";
+import RegisterForm from "./pages/Register.jsx";
+import LoginForm from "./pages/Login.jsx";
 import ProtectedRoute from "./ui/ProtectedRoute.jsx";
-import ForgotPasswordForm from "./components/auth/ForgotPasswordForm.jsx";
-import ResetPasswordForm from "./components/auth/ResetPasswordForm.jsx";
+import ForgotPasswordForm from "./pages/ForgotPassword.jsx";
+import ResetPasswordForm from "./pages/ResetPassword.jsx";
 import PageNotFound from "./ui/PageNotFound.jsx";
+import Profile from "./pages/Profile.jsx";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -29,10 +30,10 @@ function App() {
             </ProtectedRoute>
           }
         >
-          <Route index element={<Navigate replace to="dashboard" />} />
-          {/* Trqbva promqna */}
+          <Route index element={<Navigate replace to="/" />} />
           <Route path="/" element={<AppLayout />} />
         </Route>
+        <Route path="profile" element={<Profile />} />
         <Route path="login" element={<LoginForm />} />
         <Route path="signup" element={<RegisterForm />} />
         <Route path="forgot-password" element={<ForgotPasswordForm />} />

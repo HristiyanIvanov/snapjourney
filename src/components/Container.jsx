@@ -1,12 +1,9 @@
-import NewPost from "./post/NewPost";
-import Posts from "./post/Posts";
-import { useGetPosts } from "./post/useGetPosts";
+import Feed from "../pages/Feed";
+
 function Container() {
-  const { refetch } = useGetPosts();
   return (
-    <div className="flex flex-col gap-4">
-      <NewPost refetchPosts={refetch} />
-      <Posts refetch={refetch} />
+    <div>
+      <Feed />
     </div>
   );
 }

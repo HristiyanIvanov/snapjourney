@@ -19,13 +19,14 @@ function Post({
             alt="Profile pic"
           />
           <div>
-            <h1 className="hidden text-2xl font-light sm:block sm:text-xl md:text-2xl">
+            <h1 className="text-lg font-light sm:block sm:text-xl lg:text-2xl">
               {name}
             </h1>
-            <p>{time_ago}</p>
+            <p className="text-sm sm:text-base">{time_ago}</p>
+            <h1 className="block text-sm sm:text-base md:hidden">{location}</h1>
           </div>
         </div>
-        <h1>{location}</h1>
+        <h1 className="hidden md:block">{location}</h1>
       </div>
       <div className="text-lg sm:block md:text-xl lg:text-2xl">
         {description}
@@ -34,15 +35,16 @@ function Post({
       <div className="border-t border-gray-400"></div>
       <div className="flex flex-row items-center justify-between gap-2">
         <div className="flex flex-row gap-2">
-          <button className="flex flex-row items-center gap-2 rounded-xl p-2 text-xl transition-all duration-300 hover:bg-gray-200">
+          <button className="flex flex-row items-center gap-2 rounded-xl p-2 text-base transition-all duration-300 hover:bg-gray-200 md:text-xl">
             <GoThumbsup />
             <p>Like</p>
           </button>
-          <button className="flex flex-row items-center gap-2 rounded-xl p-2 text-xl transition-all duration-300 hover:bg-gray-200">
+          <button className="flex flex-row items-center gap-2 rounded-xl p-2 text-base transition-all duration-300 hover:bg-gray-200 md:text-xl">
             <GoComment />
             <p>Comment</p>
           </button>
         </div>
+        <h1 className="block text-sm md:hidden">{likes} likes</h1>
         <h1 className="hidden md:block">Liked by {likes} people</h1>
       </div>
     </div>

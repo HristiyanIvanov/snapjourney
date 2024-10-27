@@ -6,7 +6,7 @@ import toast from "react-hot-toast";
 import { useGetInteractions } from "./useGetInteractions";
 import { countLikes } from "../../utils/countLikes";
 
-function Posts({ refetch }) {
+function Posts() {
   const { isLoading: isLoadingPosts, posts, error: errorPosts } = useGetPosts();
   const { isLoading: isLoadingUsers, users, error: errorUsers } = useGetUsers();
   const {
@@ -28,7 +28,7 @@ function Posts({ refetch }) {
     <div className="flex flex-col items-center gap-4">
       {posts?.data
         ?.slice()
-        .reverse()
+        .sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
         .map((post) => (
           <Post
             key={post.id}
