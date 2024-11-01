@@ -1,5 +1,9 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { createComment, deleteComment } from "../../services/apiComments";
+import {
+  createComment,
+  deleteComment,
+  updateComment,
+} from "../../services/apiComments";
 import toast from "react-hot-toast";
 
 export function useCreateComment() {
@@ -21,7 +25,6 @@ export function useCreateComment() {
 
 export function useDeleteComment() {
   const queryClient = useQueryClient();
-
   const { mutate: deleteExistingComment, isLoading } = useMutation({
     mutationFn: (deleteId) => deleteComment(deleteId),
     onError: (error) => {
@@ -35,3 +38,22 @@ export function useDeleteComment() {
 
   return { deleteExistingComment, isLoading };
 }
+
+export const useUpdateComment = () => {
+  const queryClient = useQueryClient();
+
+  const { mutate: updateExistingComment, isLoading } = useMutation({
+    mutationFn: ({ id, comment }) => {
+      return updateComment(id, { comment });
+    },
+    onError: (error) => {
+      toast.error(error.message || "Failed to update comment");
+    },
+    onSuccess: () => {
+      toast.success("Comment edited successfully");
+      queryClient.invalidateQueries(["comments"]);
+    },
+  });
+
+  return { updateExistingComment, isLoading };
+};

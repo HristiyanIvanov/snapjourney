@@ -75,9 +75,10 @@ export async function updateComment(id, obj) {
   if (error) {
     console.error(error);
     throw new Error("Comment could not be updated");
-}
+  }
   return data;
 }
+
 export async function deleteComment(id) {
   const { data, error } = await supabase.from("comments").delete().eq("id", id);
 
