@@ -1,5 +1,6 @@
 import { GoBell, GoGear, GoHome, GoPerson } from "react-icons/go";
 import { Link, useLocation } from "react-router-dom";
+import Logout from "../components/auth/Logout";
 
 function MobileNavbar() {
   const location = useLocation();
@@ -34,6 +35,9 @@ function MobileNavbar() {
             <span className="text-xs text-gray-500">Settings</span>
           </div>
         </Link>
+        <div className="flex flex-col items-center">
+          <Logout isMobile={true} />
+        </div>
       </div>
     </div>
   );

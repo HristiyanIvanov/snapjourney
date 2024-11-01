@@ -43,7 +43,7 @@ function Sidebar() {
           isActive={location.pathname === "/settings"}
         />
       </Link>
-      <Logout />
+      <Logout isMobile={false} />
     </div>
   );
 }
