@@ -1,6 +1,6 @@
 import Container from "./Container";
 import Sidebar from "../ui/Sidebar";
-import MobileNavbar from "../ui/MobileNavBar";
+import MobileNavbar from "../ui/MobileNavbar";
 
 function AppLayout() {
   return (
