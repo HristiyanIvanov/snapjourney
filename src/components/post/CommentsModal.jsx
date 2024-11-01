@@ -96,20 +96,24 @@ function Comments({ postId }) {
                   </span>
                 </div>
               </div>
-              <div className="flex flex-row gap-2 text-xl">
-                <button
-                  type="button"
-                  onClick={() => handleEditComment(comment.id, comment.comment)}
-                >
-                  <GoPencil />
-                </button>
-                <button
-                  type="button"
-                  onClick={() => handleDeleteComment(comment.id)}
-                >
-                  <GoTrash />
-                </button>
-              </div>
+              {user?.id === comment.user_id && (
+                <div className="flex flex-row gap-2 text-xl">
+                  <button
+                    type="button"
+                    onClick={() =>
+                      handleEditComment(comment.id, comment.comment)
+                    }
+                  >
+                    <GoPencil />
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => handleDeleteComment(comment.id)}
+                  >
+                    <GoTrash />
+                  </button>
+                </div>
+              )}
             </div>
             {editingCommentId === comment.id ? (
               <div className="flex flex-row gap-2 pt-2">
