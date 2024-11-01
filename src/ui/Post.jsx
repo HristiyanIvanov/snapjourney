@@ -51,11 +51,11 @@ function Post(
           <button
             className={`flex flex-row items-center gap-2 rounded-xl p-2 text-base transition-all duration-300 ${
               isLiked ? "bg-green-200" : "hover:bg-gray-200"
-            } md:text-xl`}
+            } text-xl`}
             onClick={onLike}
           >
             <GoThumbsup />
-            <p>Like</p>
+            <p className="hidden sm:block">Like</p>
             <p
               className={`rounded-full transition-all duration-300 ${isLiked ? "bg-green-200" : "bg-gray-200"} px-2`}
             >
@@ -65,11 +65,11 @@ function Post(
           <button
             className={`flex flex-row items-center gap-2 rounded-xl p-2 text-base transition-all duration-300 ${
               isDisliked ? "bg-red-200" : "hover:bg-gray-200"
-            } md:text-xl`}
+            } text-xl`}
             onClick={onDislike}
           >
             <GoThumbsdown />
-            <p>Dislike</p>
+            <p className="hidden sm:block">Dislike</p>
             <p
               className={`rounded-full transition-all duration-300 ${isDisliked ? "bg-red-200" : "bg-gray-200"} px-2`}
             >
@@ -77,11 +77,11 @@ function Post(
             </p>
           </button>
           <button
-            className="flex flex-row items-center gap-2 rounded-xl p-2 text-base transition-all duration-300 hover:bg-gray-200 md:text-xl"
+            className="flex flex-row items-center gap-2 rounded-xl p-2 text-xl transition-all duration-300 hover:bg-gray-200"
             onClick={onOpenCommentModal}
           >
             <GoComment />
-            <p>Comment</p>
+            <p className="hidden sm:block">Comment</p>
           </button>
         </div>
       </div>
