@@ -1,5 +1,6 @@
 import Container from "./Container";
 import Sidebar from "../ui/Sidebar";
+import MobileNavbar from "../ui/MobileNavBar";
 
 function AppLayout() {
   return (
@@ -10,6 +11,7 @@ function AppLayout() {
       <div className="col-span-3 pt-14 sm:col-span-4 sm:col-start-2">
         <Container />
       </div>
+      <MobileNavbar />
       <div className="hidden sm:block">{/* <Sidebar /> */}</div>
     </div>
   );

@@ -1,9 +1,11 @@
 import { GoBell, GoGear, GoHome, GoPerson } from "react-icons/go";
 import SideBarItem from "./SideBarItem";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import Logout from "../components/auth/Logout";
 
 function Sidebar() {
+  const location = useLocation();
+
   return (
     <div className="flex min-h-screen max-w-72 flex-col gap-5 border-r border-gray-300 p-5 text-gray-600">
       <Link to="/">
@@ -14,16 +16,32 @@ function Sidebar() {
         />
       </Link>
       <Link to="/">
-        <SideBarItem icon={<GoHome />} title="Home" />
+        <SideBarItem
+          icon={<GoHome />}
+          title="Home"
+          isActive={location.pathname === "/"}
+        />
       </Link>
       <Link to="/profile">
-        <SideBarItem icon={<GoPerson />} title="My Profile" />
+        <SideBarItem
+          icon={<GoPerson />}
+          title="My Profile"
+          isActive={location.pathname === "/profile"}
+        />
       </Link>
       <Link to="/notifications">
-        <SideBarItem icon={<GoBell />} title="Notifications" />
+        <SideBarItem
+          icon={<GoBell />}
+          title="Notifications"
+          isActive={location.pathname === "/notifications"}
+        />
       </Link>
       <Link to="/settings">
-        <SideBarItem icon={<GoGear />} title="Settings" />
+        <SideBarItem
+          icon={<GoGear />}
+          title="Settings"
+          isActive={location.pathname === "/settings"}
+        />
       </Link>
       <Logout />
     </div>
