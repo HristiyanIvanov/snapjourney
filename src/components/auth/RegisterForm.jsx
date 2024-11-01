@@ -42,6 +42,8 @@ function Register() {
         <input
           type="text"
           id="fullName"
+          autoComplete="name"
+          placeholder="Enter your full name"
           value={fullName}
           onChange={(e) => setFullName(e.target.value)}
           disabled={isLoading}
@@ -53,6 +55,8 @@ function Register() {
         <input
           type="email"
           id="email"
+          autoComplete="email"
+          placeholder="Enter your email address"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           disabled={isLoading}
@@ -65,6 +69,8 @@ function Register() {
         <input
           type="password"
           id="password"
+          autoComplete="current-password"
+          placeholder="Enter your password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           disabled={isLoading}
@@ -76,6 +82,7 @@ function Register() {
         <input
           type="password"
           id="confirmPassword"
+          placeholder="Confirm your password"
           value={confirmPassword}
           onChange={(e) => setConfirmPassword(e.target.value)}
           disabled={isLoading}

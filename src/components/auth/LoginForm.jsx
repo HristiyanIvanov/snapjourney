@@ -34,6 +34,7 @@ function Login() {
           type="email"
           id="email"
           autoComplete="username"
+          placeholder="Enter your email address"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           disabled={isLoading}
@@ -47,6 +48,7 @@ function Login() {
           type="password"
           id="password"
           autoComplete="current-password"
+          placeholder="Enter your password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           disabled={isLoading}
@@ -60,11 +62,11 @@ function Login() {
         Forgot password?
       </button>
       <div className="flex flex-row items-center justify-between">
-        <Button type="submit">
-          {!isLoading ? "Log in" : <div className="loader" />}
-        </Button>
         <Button color="orange" onClick={() => navigate("/signup")}>
           Sign up
+        </Button>
+        <Button type="submit">
+          {!isLoading ? "Log in" : <div className="loader" />}
         </Button>
       </div>
     </form>

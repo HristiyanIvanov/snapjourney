@@ -1,16 +1,29 @@
-import { GoComment, GoThumbsup } from "react-icons/go";
+import { forwardRef } from "react";
+import { GoComment, GoThumbsdown, GoThumbsup } from "react-icons/go";
 
-function Post({
-  description,
-  postImage,
-  name,
-  profile_pic,
-  time_ago,
-  location,
-  likes,
-}) {
+function Post(
+  {
+    description,
+    postImage,
+    name,
+    profile_pic,
+    time_ago,
+    location,
+    likes,
+    dislikes,
+    onLike,
+    onDislike,
+    isLiked,
+    isDisliked,
+    onOpenCommentModal,
+  },
+  ref,
+) {
   return (
-    <div className="flex size-4/5 flex-col gap-5 rounded-xl border border-gray-300 bg-gray-50 px-5 py-6 font-light text-gray-600">
+    <div
+      ref={ref}
+      className="flex size-4/5 flex-col gap-5 rounded-xl border border-gray-300 bg-gray-50 px-5 py-6 font-light text-gray-600"
+    >
       <div className="flex flex-row items-center justify-between gap-2">
         <div className="flex flex-row items-center gap-2">
           <img
@@ -31,24 +44,50 @@ function Post({
       <div className="text-lg sm:block md:text-xl lg:text-2xl">
         {description}
       </div>
-      <img className="size-auto" src={postImage} />
+      <img className="size-auto" src={postImage} alt="Post image" />
       <div className="border-t border-gray-400"></div>
       <div className="flex flex-row items-center justify-between gap-2">
         <div className="flex flex-row gap-2">
-          <button className="flex flex-row items-center gap-2 rounded-xl p-2 text-base transition-all duration-300 hover:bg-gray-200 md:text-xl">
+          <button
+            className={`flex flex-row items-center gap-2 rounded-xl p-2 text-base transition-all duration-300 ${
+              isLiked ? "bg-green-200" : "hover:bg-gray-200"
+            } md:text-xl`}
+            onClick={onLike}
+          >
             <GoThumbsup />
             <p>Like</p>
+            <p
+              className={`rounded-full transition-all duration-300 ${isLiked ? "bg-green-200" : "bg-gray-200"} px-2`}
+            >
+              {likes}
+            </p>
           </button>
-          <button className="flex flex-row items-center gap-2 rounded-xl p-2 text-base transition-all duration-300 hover:bg-gray-200 md:text-xl">
+          <button
+            className={`flex flex-row items-center gap-2 rounded-xl p-2 text-base transition-all duration-300 ${
+              isDisliked ? "bg-red-200" : "hover:bg-gray-200"
+            } md:text-xl`}
+            onClick={onDislike}
+          >
+            <GoThumbsdown />
+            <p>Dislike</p>
+            <p
+              className={`rounded-full transition-all duration-300 ${isDisliked ? "bg-red-200" : "bg-gray-200"} px-2`}
+            >
+              {dislikes}
+            </p>
+          </button>
+          <button
+            className="flex flex-row items-center gap-2 rounded-xl p-2 text-base transition-all duration-300 hover:bg-gray-200 md:text-xl"
+            onClick={onOpenCommentModal}
+          >
             <GoComment />
             <p>Comment</p>
           </button>
         </div>
-        <h1 className="block text-sm md:hidden">{likes} likes</h1>
-        <h1 className="hidden md:block">Liked by {likes} people</h1>
       </div>
     </div>
   );
 }
 
-export default Post;
+const PostRef = forwardRef(Post);
+export default PostRef;

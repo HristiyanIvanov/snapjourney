@@ -29,6 +29,7 @@ function ResetPassword() {
         <input
           type="password"
           id="newPassword"
+          placeholder="Enter your new password"
           value={newPassword}
           onChange={(e) => setNewPassword(e.target.value)}
           disabled={isLoading}
@@ -40,6 +41,7 @@ function ResetPassword() {
         <input
           type="password"
           id="confirmPassword"
+          placeholder="Confirm your new password"
           value={confirmPassword}
           onChange={(e) => setConfirmPassword(e.target.value)}
           disabled={isLoading}

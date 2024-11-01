@@ -26,6 +26,7 @@ function ForgotPassword() {
           id="email"
           autoComplete="username"
           value={email}
+          placeholder="Enter your email address"
           onChange={(e) => setEmail(e.target.value)}
           disabled={isLoading}
           className="w-80 rounded-lg border border-gray-200 p-2 outline-teal-400"

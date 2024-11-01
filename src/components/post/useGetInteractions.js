@@ -1,14 +1,31 @@
 import { useQuery } from "@tanstack/react-query";
-import { getInteractions } from "../../services/apiIntercations";
+import {
+  getInteractionByUserOnPost,
+  getInteractions,
+} from "../../services/apiIntercations";
 
 export function useGetInteractions() {
   const {
-    isLoading,
     data: interactions,
+    isLoading,
     error,
   } = useQuery({
     queryKey: ["interactions"],
-    queryFn: () => getInteractions(),
+    queryFn: getInteractions,
   });
-  return { isLoading, interactions, error };
+
+  return { interactions, isLoading, error };
+}
+
+export function useGetInteractionsByUserOnPost(userId, postId) {
+  const {
+    data: interactions,
+    isLoading,
+    error,
+  } = useQuery({
+    queryKey: ["interactions", userId, postId],
+    queryFn: () => getInteractionByUserOnPost(userId, postId),
+  });
+
+  return { interactions, isLoading, error };
 }

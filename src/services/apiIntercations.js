@@ -69,16 +69,26 @@ export async function updateInteraction(id, obj) {
   }
   return data;
 }
-export async function createInteraction(obj) {
-  const { data, error } = await supabase.from("interactions").insert(obj);
+
+export const createInteraction = async (interactionData) => {
+  const { data, error } = await supabase
+    .from("interactions")
+    .insert([interactionData])
+    .select("*")
+    .single();
+
   if (error) {
-    console.error(error);
-    throw new Error("Interaction could not be created");
+    throw new Error(error.message);
   }
+
   return data;
-}
+};
+
 export async function deleteInteraction(id) {
-  const { data, error } = await supabase.from("interactions").delete().eq("id", id);
+  const { data, error } = await supabase
+    .from("interactions")
+    .delete()
+    .eq("id", id);
 
   if (error) {
     console.error(error);

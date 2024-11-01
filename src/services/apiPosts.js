@@ -1,14 +1,19 @@
 import supabase from "./supabase";
 
-export async function getPosts() {
-  let query = supabase.from("posts").select("*");
-  const { data, error } = await query;
+export async function getPosts(page, limit) {
+  const { data, error } = await supabase
+    .from("posts")
+    .select("*")
+    .order("created_at", { ascending: false })
+    .range((page - 1) * limit, page * limit - 1);
+
   if (error) {
     console.error(error);
     throw new Error("Posts could not be loaded");
   }
   return { data, error };
 }
+
 export async function getPost(id) {
   const { data, error } = await supabase
     .from("posts")

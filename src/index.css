@@ -8,22 +8,21 @@
   }
 }
 @layer components {
-.loader {
-  display: flex;
-  width: 3rem;
-  height: 3rem;
-  margin: auto;
-  padding: auto;
-  border: 6px solid #2dd4bf;
-  border-right-color: transparent;
-  border-radius: 50%;
-  animation: spin 1.5s linear infinite;
-}
-
-@keyframes spin {
-  100% {
-    transform: rotate(360deg);
+  .loader {
+    display: flex;
+    width: 3rem;
+    height: 3rem;
+    margin: auto;
+    padding: auto;
+    border: 6px solid #2dd4bf;
+    border-right-color: transparent;
+    border-radius: 50%;
+    animation: spin 1.5s linear infinite;
   }
-}
 
+  @keyframes spin {
+    100% {
+      transform: rotate(360deg);
+    }
+  }
 }
