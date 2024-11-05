@@ -3,8 +3,8 @@ import { useLogin } from "./useLogin";
 import Button from "../../ui/Button";
 import { useNavigate } from "react-router-dom";
 function Login() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("test@snapjourney.bg");
+  const [password, setPassword] = useState("test123");
   const { login, isLoading } = useLogin();
   const navigate = useNavigate();
 
@@ -36,7 +36,6 @@ function Login() {
           autoComplete="username"
           placeholder="Enter your email address"
           value={email}
-          defaultValue="test@snapjourney.bg"
           onChange={(e) => setEmail(e.target.value)}
           disabled={isLoading}
           className="w-80 rounded-lg border border-gray-200 p-2 outline-teal-400"
@@ -51,7 +50,6 @@ function Login() {
           autoComplete="current-password"
           placeholder="Enter your password"
           value={password}
-          defaultValue="test123"
           onChange={(e) => setPassword(e.target.value)}
           disabled={isLoading}
           className="w-80 rounded-lg border border-gray-200 p-2 outline-teal-400"
