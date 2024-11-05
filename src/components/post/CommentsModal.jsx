@@ -1,76 +1,29 @@
-import { useState } from "react";
-import { useGetComments } from "./useGetComments";
-import {
-  useCreateComment,
-  useDeleteComment,
-  useUpdateComment,
-} from "./useComments";
+import { useComment } from "./useComment";
 import Button from "../../ui/Button";
-import toast from "react-hot-toast";
-import { useUser } from "../auth/useUser";
-import { useGetUsers } from "../profile/useGetUsers";
 import { timeAgo } from "../../utils/convertDate";
 import { GoPencil, GoTrash } from "react-icons/go";
 
 function Comments({ postId }) {
-  const [visibleCommentsCount, setVisibleCommentsCount] = useState(5);
-  const { comments, isLoading: commentsLoading } = useGetComments(postId);
-  const { createNewComment, isLoading: createCommentLoading } =
-    useCreateComment();
-  const [newComment, setNewComment] = useState("");
-  const [editCommentText, setEditCommentText] = useState("");
-  const { user } = useUser();
-  const { users } = useGetUsers();
-  const { deleteExistingComment, isLoading: deleteCommentLoading } =
-    useDeleteComment();
-  const { updateExistingComment, isLoading: updateCommentLoading } =
-    useUpdateComment();
-  const [editingCommentId, setEditingCommentId] = useState(null);
+  const {
+    comments,
+    visibleCommentsCount,
+    commentsLoading,
+    createCommentLoading,
+    handleAddComment,
+    handleDeleteComment,
+    handleEditComment,
+    handleUpdateComment,
+    handleLoadMoreComments,
+    newComment,
+    setNewComment,
+    editCommentText,
+    setEditCommentText,
+    editingCommentId,
+    users,
+    user,
+  } = useComment(postId);
 
-  const handleAddComment = async (e) => {
-    e.preventDefault();
-    if (newComment.trim()) {
-      createNewComment({
-        post_id: postId,
-        user_id: user?.id,
-        comment: newComment,
-      });
-      setNewComment("");
-    } else {
-      toast.error("Comment cannot be empty");
-    }
-  };
-
-  const handleDeleteComment = async (commentId) => {
-    deleteExistingComment(commentId);
-  };
-
-  const handleEditComment = (commentId, commentText) => {
-    setEditingCommentId(commentId);
-    setEditCommentText(commentText);
-  };
-
-  const handleUpdateComment = async (commentId) => {
-    if (editCommentText.trim()) {
-      updateExistingComment({ id: commentId, comment: editCommentText });
-      setEditCommentText("");
-      setEditingCommentId(null);
-    } else {
-      toast.error("Comment cannot be empty");
-    }
-  };
-
-  const handleLoadMoreComments = () => {
-    setVisibleCommentsCount((prevCount) => prevCount + 5);
-  };
-
-  if (
-    commentsLoading ||
-    createCommentLoading ||
-    deleteCommentLoading ||
-    updateCommentLoading ||
-    users.isLoading
-  )
+  if (commentsLoading || createCommentLoading)
     return <div className="loader" />;
 
   return (
@@ -105,7 +58,7 @@ function Comments({ postId }) {
                       </span>
                     </div>
                   </div>
-                  {user?.id === comment.user_id && (
+                  {comment.user_id === user?.id && (
                     <div className="flex flex-row gap-2 text-xl">
                       <button
                         type="button"

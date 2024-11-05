@@ -1,7 +1,9 @@
+import ProfileComponent from "../components/profile/ProfileComponent";
+
 function Profile() {
   return (
     <div>
-      <h1>Profile</h1>
+      <ProfileComponent />
     </div>
   );
 }

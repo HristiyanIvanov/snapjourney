@@ -1,4 +1,4 @@
-function Button({ children, onClick, color = "teal" }) {
+function Button({ children, onClick, color = "teal", disabled }) {
   const colorClasses = {
     teal: "border-teal-500 bg-teal-300 hover:bg-teal-400",
     gray: "border-gray-500 bg-gray-300 hover:bg-gray-400",
@@ -13,6 +13,7 @@ function Button({ children, onClick, color = "teal" }) {
     <button
       className={`rounded-lg border px-4 py-2 font-light transition-all duration-300 ${colorClasses[color]}`}
       onClick={onClick}
+      disabled={disabled}
     >
       {children}
     </button>

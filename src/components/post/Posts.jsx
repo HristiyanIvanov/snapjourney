@@ -8,11 +8,9 @@ import { useGetInteractions } from "./useGetInteractions";
 import { countLikes } from "../../utils/countLikes";
 import { usePagination } from "./usePagination";
 import { useInfiniteScroll } from "./useInfiniteScroll";
-import { useUser } from "../auth/useUser";
-import { useCreateInteraction, useDeleteInteraction } from "./useInteractions";
-import { useQueryClient } from "@tanstack/react-query";
 import Modal from "../../ui/Modal";
 import Comments from "./CommentsModal";
+import { useInteraction } from "./useInteraction";
 
 function Posts() {
   const [allPosts, setAllPosts] = useState([]);
@@ -38,12 +36,9 @@ function Posts() {
     incrementPage,
   );
 
-  const { user } = useUser();
-  const { createNewInteraction } = useCreateInteraction();
-  const { deleteExistingInteraction } = useDeleteInteraction();
-  const queryClient = useQueryClient();
   const [isCommentModalVisible, setCommentModalVisible] = useState(false);
   const [selectedPostId, setSelectedPostId] = useState(null);
+  const { toggleInteraction, isLiked, isDisliked } = useInteraction();
 
   const openCommentModal = (postId) => {
     setSelectedPostId(postId);
@@ -80,59 +75,6 @@ function Posts() {
       `Error: ${errorPosts?.message || errorUsers?.message || errorInteractions?.message}`,
     );
   }
-
-  const toggleInteraction = (postId, interactionType) => {
-    const existingInteraction = interactions?.data.find(
-      (interaction) =>
-        interaction.post_id === postId &&
-        interaction.user_id === user?.id &&
-        interaction.type === interactionType,
-    );
-
-    if (existingInteraction) {
-      deleteExistingInteraction(existingInteraction.id);
-    } else {
-      createNewInteraction({
-        post_id: postId,
-        user_id: user?.id,
-        type: interactionType,
-      });
-
-      const oppositeInteractionType =
-        interactionType === "like" ? "dislike" : "like";
-      const oppositeInteraction = interactions?.data.find(
-        (interaction) =>
-          interaction.post_id === postId &&
-          interaction.user_id === user?.id &&
-          interaction.type === oppositeInteractionType,
-      );
-
-      if (oppositeInteraction) {
-        deleteExistingInteraction(oppositeInteraction.id);
-      }
-    }
-
-    queryClient.invalidateQueries("posts");
-    queryClient.invalidateQueries("interactions");
-  };
-
-  const isLiked = (postId) => {
-    return interactions?.data.some(
-      (interaction) =>
-        interaction.post_id === postId &&
-        interaction.user_id === user?.id &&
-        interaction.type === "like",
-    );
-  };
-
-  const isDisliked = (postId) => {
-    return interactions?.data.some(
-      (interaction) =>
-        interaction.post_id === postId &&
-        interaction.user_id === user?.id &&
-        interaction.type === "dislike",
-    );
-  };
 
   return (
     <div className="flex flex-col items-center gap-4">

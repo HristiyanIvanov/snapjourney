@@ -50,28 +50,28 @@ function Post(
         <div className="flex flex-row gap-2">
           <button
             className={`flex flex-row items-center gap-2 rounded-xl p-2 text-base transition-all duration-300 ${
-              isLiked ? "bg-green-200" : "hover:bg-gray-200"
+              isLiked ? "bg-blue-300" : "hover:bg-blue-300"
             } text-xl`}
             onClick={onLike}
           >
             <GoThumbsup />
             <p className="hidden sm:block">Like</p>
             <p
-              className={`rounded-full transition-all duration-300 ${isLiked ? "bg-green-200" : "bg-gray-200"} px-2`}
+              className={`rounded-full transition-all duration-300 ${isLiked ? "bg-blue-300" : "bg-gray-200"} px-2`}
             >
               {likes}
             </p>
           </button>
           <button
             className={`flex flex-row items-center gap-2 rounded-xl p-2 text-base transition-all duration-300 ${
-              isDisliked ? "bg-red-200" : "hover:bg-gray-200"
+              isDisliked ? "bg-red-300" : "hover:bg-red-300"
             } text-xl`}
             onClick={onDislike}
           >
             <GoThumbsdown />
             <p className="hidden sm:block">Dislike</p>
             <p
-              className={`rounded-full transition-all duration-300 ${isDisliked ? "bg-red-200" : "bg-gray-200"} px-2`}
+              className={`rounded-full transition-all duration-300 ${isDisliked ? "bg-red-300" : "bg-gray-200"} px-2`}
             >
               {dislikes}
             </p>
