@@ -36,6 +36,7 @@ function Login() {
           autoComplete="username"
           placeholder="Enter your email address"
           value={email}
+          defaultValue="test@snapjourney.bg"
           onChange={(e) => setEmail(e.target.value)}
           disabled={isLoading}
           className="w-80 rounded-lg border border-gray-200 p-2 outline-teal-400"
@@ -50,6 +51,7 @@ function Login() {
           autoComplete="current-password"
           placeholder="Enter your password"
           value={password}
+          defaultValue="test123"
           onChange={(e) => setPassword(e.target.value)}
           disabled={isLoading}
           className="w-80 rounded-lg border border-gray-200 p-2 outline-teal-400"
