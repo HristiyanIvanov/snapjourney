@@ -91,9 +91,9 @@ function FullPostModal({ isVisible, onClose, post }) {
           <div className="flex gap-2">
             <button
               onClick={() => toggleInteraction(post.id, "like")}
-              className={`flex items-center gap-1 rounded-lg border border-blue-400 px-2 py-2 text-white transition-colors duration-300 ${
+              className={`flex items-center gap-1 rounded-lg border border-blue-400 px-2 py-2 text-blue-400 transition-colors duration-300 ${
                 isLiked
-                  ? "bg-blue-400 hover:bg-blue-500"
+                  ? "bg-blue-400 text-white hover:bg-blue-500"
                   : "text-blue-400 hover:bg-blue-500 hover:text-white"
               }`}
             >
@@ -102,9 +102,9 @@ function FullPostModal({ isVisible, onClose, post }) {
             </button>
             <button
               onClick={() => toggleInteraction(post.id, "dislike")}
-              className={`flex items-center gap-1 rounded-lg border border-red-400 px-2 py-2 text-white transition-colors duration-300 ${
+              className={`flex items-center gap-1 rounded-lg border border-red-400 px-2 py-2 text-red-400 transition-colors duration-300 ${
                 isDisliked
-                  ? "bg-red-400 hover:bg-red-500"
+                  ? "bg-red-400 text-white hover:bg-red-500"
                   : "text-red-400 hover:bg-red-500 hover:text-white"
               }`}
             >
