@@ -10,11 +10,11 @@ export function useSignup() {
     mutationFn: signupApi,
     onSuccess: (user) => {
       queryClient.setQueryData(["user"], user.user);
-      toast.success("Account created successfully. Please confirm your email");
+      toast.success("Account created successfully. Please confirm your email.");
       navigate("/login", { replace: true });
     },
     onError: (err) => {
-      console.log("ERROR", err);
+      console.error("ERROR", err);
       toast.error(err.message || "An error occurred during signup");
     },
   });

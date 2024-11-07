@@ -73,11 +73,11 @@ export async function updateFollower(id, obj) {
   return data;
 }
 
-export async function deleteFollower(id) {
+export async function deleteFollower(followed_id) {
   const { data, error } = await supabase
     .from("followers")
     .delete()
-    .eq("id", id);
+    .eq("followed_id", followed_id);
 
   if (error) {
     console.error(error);

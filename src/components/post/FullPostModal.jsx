@@ -14,6 +14,7 @@ import { useInteraction } from "./useInteraction";
 import { countLikes } from "../../utils/countLikes";
 import { useGetInteractions } from "./useGetInteractions";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 function FullPostModal({ isVisible, onClose, post }) {
   const { toggleInteraction } = useInteraction();
@@ -39,7 +40,18 @@ function FullPostModal({ isVisible, onClose, post }) {
       users?.data?.find((user) => user.id === userId)?.full_name || "Anonymous"
     );
   };
-
+  const isLiked = interactions?.data.some(
+    (interaction) =>
+      interaction.post_id === post?.id &&
+      interaction.user_id === user?.id &&
+      interaction.type === "like",
+  );
+  const isDisliked = interactions?.data.some(
+    (interaction) =>
+      interaction.post_id === post?.id &&
+      interaction.user_id === user?.id &&
+      interaction.type === "dislike",
+  );
   const handleStartEdit = (comment) => {
     setEditingCommentId(comment.id);
     setEditedComment(comment.comment);
@@ -51,35 +63,55 @@ function FullPostModal({ isVisible, onClose, post }) {
     setEditedComment("");
   };
 
+  const handleUsernameClick = () => {
+    onClose();
+  };
+
   return (
     <Modal
       isVisible={isVisible}
       onClose={onClose}
       title={`${users?.data?.find((user) => user.id === post.user_id)?.full_name}'s Post`}
     >
-      <div className="flex max-h-[65vh] max-w-[80vw] flex-col gap-4 overflow-y-auto sm:max-h-[75vh] sm:max-w-md">
-        <h2 className="pt-5 text-lg font-light">{post.description}</h2>
+      <div className="flex max-h-[75vh] max-w-[90vw] flex-col gap-4 overflow-y-auto sm:max-h-[75vh] sm:max-w-md">
+        <h2 className="text-lg font-light">{post.description}</h2>
         <img
           src={post.photo_url}
           alt="Full Post"
-          className="mx-auto max-h-[50vh] w-4/5 rounded-lg object-cover"
+          className="max-h-[59vh] w-[90vw] rounded-lg object-cover"
         />
 
-        <div className="flex justify-center gap-3">
-          <button
-            onClick={() => toggleInteraction(post.id, "like")}
-            className="flex items-center gap-1 rounded-lg bg-blue-400 px-4 py-2 text-white transition-colors hover:bg-blue-500"
-          >
-            <GoThumbsup className="h-5 w-5" />
-            <span>{countLikes(post.id, interactions?.data, "like")}</span>
-          </button>
-          <button
-            onClick={() => toggleInteraction(post.id, "dislike")}
-            className="flex items-center gap-1 rounded-lg bg-red-400 px-4 py-2 text-white transition-colors hover:bg-red-500"
-          >
-            <GoThumbsdown className="h-5 w-5" />
-            <span>{countLikes(post.id, interactions?.data, "dislike")}</span>
-          </button>
+        <div className="flex justify-center gap-10">
+          <h1 className="text-sm font-light">
+            The post is liked by{" "}
+            {countLikes(post.id, interactions?.data, "like")} people and
+            disliked by {countLikes(post.id, interactions?.data, "dislike")}{" "}
+            people
+          </h1>
+          <div className="flex gap-2">
+            <button
+              onClick={() => toggleInteraction(post.id, "like")}
+              className={`flex items-center gap-1 rounded-lg border border-blue-400 px-2 py-2 text-white transition-colors duration-300 ${
+                isLiked
+                  ? "bg-blue-400 hover:bg-blue-500"
+                  : "text-blue-400 hover:bg-blue-500 hover:text-white"
+              }`}
+            >
+              <GoThumbsup className="h-5 w-5" />
+              <span>{isLiked ? "Liked" : "Like"}</span>
+            </button>
+            <button
+              onClick={() => toggleInteraction(post.id, "dislike")}
+              className={`flex items-center gap-1 rounded-lg border border-red-400 px-2 py-2 text-white transition-colors duration-300 ${
+                isDisliked
+                  ? "bg-red-400 hover:bg-red-500"
+                  : "text-red-400 hover:bg-red-500 hover:text-white"
+              }`}
+            >
+              <GoThumbsdown className="h-5 w-5" />
+              <span>{isDisliked ? "Disliked" : "Dislike"}</span>
+            </button>
+          </div>
         </div>
 
         <div className="mt-4">
@@ -91,7 +123,14 @@ function FullPostModal({ isVisible, onClose, post }) {
                 className="mb-2 border-b border-gray-200 pb-2"
               >
                 <p className="break-words text-sm">
-                  <strong>{getCommentUserName(comment.user_id)}:</strong>{" "}
+                  <Link
+                    to={`/profile/${users?.data?.find((user) => user.id === comment.user_id)?.username}`}
+                    onClick={handleUsernameClick}
+                    className="font-semibold text-teal-500 transition-colors hover:text-teal-600"
+                  >
+                    {getCommentUserName(comment.user_id)}
+                  </Link>
+                  :{" "}
                   {editingCommentId === comment.id ? (
                     <textarea
                       type="text"

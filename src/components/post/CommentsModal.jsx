@@ -27,7 +27,7 @@ function Comments({ postId }) {
     return <div className="loader" />;
 
   return (
-    <div className="max-h-[75vh] overflow-y-auto">
+    <div className="max-h-[75vh] max-w-[90vw] overflow-y-auto">
       <form onSubmit={handleAddComment}>
         <div className="flex max-w-3xl flex-col gap-2 divide-y divide-solid divide-gray-200 border-b border-gray-300 pb-2 text-gray-600">
           {comments

@@ -37,14 +37,36 @@ export async function updateUser(id, obj) {
   }
   return data;
 }
-export async function createUser(obj) {
-  const { data, error } = await supabase.from("users").insert(obj);
+export async function createUser(authUser, userData) {
+  const { data: authData, error: authError } = await supabase.auth.signUp({
+    email: authUser.email,
+    password: authUser.password,
+  });
+
+  if (authError) {
+    console.error(authError);
+    throw new Error("User could not be created in auth");
+  }
+
+  const { data, error } = await supabase.from("users").insert([
+    {
+      id: authData.user.id,
+      username: userData.username,
+      full_name: userData.full_name,
+      avatar_url: userData.avatar_url,
+      email: authUser.email,
+      bio: userData.bio,
+    },
+  ]);
+
   if (error) {
     console.error(error);
-    throw new Error("User could not be created");
+    throw new Error("User could not be created in users table");
   }
+
   return data;
 }
+
 export async function deleteUser(id) {
   const { data, error } = await supabase.from("users").delete().eq("id", id);
 

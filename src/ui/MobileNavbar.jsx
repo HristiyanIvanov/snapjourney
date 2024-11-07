@@ -13,7 +13,7 @@ function MobileNavbar() {
   const currentUser = users?.data?.find((u) => u.id === user?.id);
 
   if (usersLoading || userLoading) {
-    return <div className="loader" />;
+    return null;
   }
 
   return (

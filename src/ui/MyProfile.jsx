@@ -1,6 +1,7 @@
 import FullPostModal from "../components/post/FullPostModal";
 import EditProfileModal from "../components/profile/EditProfileModal";
 import Button from "./Button";
+import FollowersFollowingModal from "../components/profile/FollowersFollowingModal";
 
 function MyProfile({
   avatar,
@@ -19,6 +20,19 @@ function MyProfile({
   selectedPost,
   handleClosePostModal,
   handlePostClick,
+  isCurrentUser,
+  isFollowing,
+  onFollow,
+  onUnfollow,
+  followersArr,
+  isFollowersModalVisible,
+  handleFollowersClick,
+  isFollowingsModalVisible,
+  setIsFollowingsModalVisible,
+  setIsFollowersModalVisible,
+  handleFollowingsClick,
+  userFollowers,
+  userFollowings,
 }) {
   return (
     <div className="flex flex-col items-center p-8 md:w-full">
@@ -44,20 +58,36 @@ function MyProfile({
             <span className="text-lg font-bold">{likesCount}</span>
             <p className="text-sm">Likes</p>
           </div>
-          <div className="text-center">
+          <div
+            className={`text-center transition duration-300 ease-in-out ${isCurrentUser ? "cursor-pointer hover:text-teal-500" : "cursor-default"}`}
+            onClick={isCurrentUser ? handleFollowersClick : null}
+          >
             <span className="text-lg font-bold">{followed}</span>
             <p className="text-sm">Followers</p>
           </div>
-          <div className="text-center">
+          <div
+            className={`text-center transition duration-300 ease-in-out ${isCurrentUser ? "cursor-pointer hover:text-teal-500" : "cursor-default"}`}
+            onClick={isCurrentUser ? handleFollowingsClick : null}
+          >
             <span className="text-lg font-bold">{followers}</span>
             <p className="text-sm">Following</p>
           </div>
         </div>
 
         <div className="mt-6">
-          <Button color="gray" onClick={handleEditProfile}>
-            Edit Profile
-          </Button>
+          {isCurrentUser ? (
+            <Button color="gray" onClick={handleEditProfile}>
+              Edit Profile
+            </Button>
+          ) : isFollowing ? (
+            <Button color="red" onClick={onUnfollow}>
+              Unfollow
+            </Button>
+          ) : (
+            <Button color="teal" onClick={onFollow}>
+              Follow
+            </Button>
+          )}
         </div>
       </div>
 
@@ -69,7 +99,9 @@ function MyProfile({
       />
 
       <div className="p-4 md:w-full">
-        <h2 className="mb-4 text-2xl font-semibold text-gray-800">My Posts</h2>
+        <h2 className="mb-4 text-2xl font-semibold text-gray-800">
+          {isCurrentUser ? "My Posts" : `${fullName}'s Posts`}
+        </h2>
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
           {posts.length > 0 ? (
             posts.map((post) => (
@@ -95,6 +127,20 @@ function MyProfile({
         isVisible={isPostModalVisible}
         onClose={handleClosePostModal}
         post={selectedPost}
+      />
+      <FollowersFollowingModal
+        isVisible={isFollowersModalVisible}
+        onClose={() => setIsFollowersModalVisible(false)}
+        followersArr={followersArr}
+        isFollowers={true}
+        userFollowers={userFollowers}
+      />
+      <FollowersFollowingModal
+        isVisible={isFollowingsModalVisible}
+        onClose={() => setIsFollowingsModalVisible(false)}
+        followersArr={followersArr}
+        isFollowers={false}
+        userFollowings={userFollowings}
       />
     </div>
   );

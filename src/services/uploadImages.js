@@ -13,10 +13,13 @@ export async function uploadImage(file) {
   return data;
 }
 
-export async function uploadAvatar(file, oldAvatarId) {
-  const oldAvatarFileName = `avatar-${oldAvatarId}`;
+export async function uploadAvatar(file, oldAvatarId, oldAvatarUrl) {
+  const defaultAvatarUrl =
+    "https://cfyajbqgaohqekcurmuz.supabase.co/storage/v1/object/public/avatars/no_picture.png";
 
-  if (oldAvatarId) {
+  if (oldAvatarUrl !== defaultAvatarUrl) {
+    const oldAvatarFileName = `avatar-${oldAvatarId}`;
+
     const { error: deleteError } = await supabase.storage
       .from("avatars")
       .remove([oldAvatarFileName]);

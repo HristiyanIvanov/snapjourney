@@ -1,19 +1,37 @@
 import supabase, { supabaseUrl } from "./supabase";
 
-export async function signup({ fullName, email, password }) {
+export async function signup({ fullName, email, password, username }) {
   const { data, error } = await supabase.auth.signUp({
     email,
     password,
     options: {
       data: {
         full_name: fullName,
-        avatar_url: "",
+        username,
+        avatar_url:
+          "https://cfyajbqgaohqekcurmuz.supabase.co/storage/v1/object/public/avatars/no_picture.png",
         bio: "",
       },
     },
   });
 
   if (error) throw new Error(error.message);
+
+  const { user } = data;
+
+  const { error: insertError } = await supabase.from("users").insert([
+    {
+      id: user.id,
+      full_name: fullName,
+      username,
+      email,
+      avatar_url:
+        "https://cfyajbqgaohqekcurmuz.supabase.co/storage/v1/object/public/avatars/no_picture.png",
+      bio: "",
+    },
+  ]);
+
+  if (insertError) throw new Error("Failed to insert user into users table");
 
   return data;
 }

@@ -9,6 +9,7 @@ function Register() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [fullName, setFullName] = useState("");
+  const [username, setUsername] = useState("");
   const { signup, isLoading } = useSignup();
   const navigate = useNavigate();
   function handleSubmit(e) {
@@ -20,12 +21,13 @@ function Register() {
     }
 
     signup(
-      { email, password, fullName },
+      { email, password, fullName, username },
       {
         onSettled: () => {
           setEmail("");
           setPassword("");
           setFullName("");
+          setUsername("");
         },
       },
     );
@@ -46,6 +48,19 @@ function Register() {
           placeholder="Enter your full name"
           value={fullName}
           onChange={(e) => setFullName(e.target.value)}
+          disabled={isLoading}
+          className="w-80 rounded-lg border border-gray-200 p-2 outline-teal-400"
+        />
+      </div>
+      <div label="Username">
+        <h1 className="text-base font-light">Username</h1>
+        <input
+          type="text"
+          id="username"
+          autoComplete="username"
+          placeholder="Enter your username"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
           disabled={isLoading}
           className="w-80 rounded-lg border border-gray-200 p-2 outline-teal-400"
         />

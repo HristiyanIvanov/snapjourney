@@ -1,7 +1,6 @@
 import Container from "./Container";
 import Sidebar from "../ui/Sidebar";
 import MobileNavbar from "../ui/MobileNavbar";
-
 function AppLayout() {
   return (
     <div className="m-auto grid grid-cols-3 gap-4 sm:grid-cols-6">

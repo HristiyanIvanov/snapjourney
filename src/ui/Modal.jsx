@@ -3,8 +3,16 @@ import { GoX } from "react-icons/go";
 function Modal({ isVisible, onClose, title, children }) {
   if (!isVisible) return null;
 
+  const handleBackdropClick = (e) => {
+    if (e.target === e.currentTarget) {
+      onClose();
+    }
+  };
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-60">
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-60"
+      onClick={handleBackdropClick}
+    >
       <div className="w-auto rounded-lg bg-white p-5 shadow-lg">
         <div className="flex flex-row items-center justify-between gap-20 pb-2">
           <h2 className="text-center text-lg text-gray-600">{title}</h2>

@@ -50,8 +50,13 @@ function EditProfileModal({ isVisible, onClose }) {
     setLoading(true);
     const updates = [];
     const oldAvatarId = currentUser.avatar_url.split("/").pop().split("-")[1];
+    const oldAvatarUrl = currentUser.avatar_url;
     if (avatarFile) {
-      const { fullPath } = await uploadAvatar(avatarFile, oldAvatarId);
+      const { fullPath } = await uploadAvatar(
+        avatarFile,
+        oldAvatarId,
+        oldAvatarUrl,
+      );
       updates.push(
         editAvatar({
           id: user.id,

@@ -5,6 +5,8 @@ import MyProfile from "../../ui/MyProfile";
 import { useUser } from "../auth/useUser";
 import { useGetFollowers } from "./useGetFollowers";
 import { useState } from "react";
+import { useParams } from "react-router-dom";
+import { useFollowUser, useUnfollowUser } from "./useFollowers";
 
 function ProfileComponent() {
   const { users, isLoading: usersLoading } = useGetUsers();
@@ -12,10 +14,15 @@ function ProfileComponent() {
   const { interactions, isLoading: interactionsLoading } = useGetInteractions();
   const { posts, isLoading: postsLoading } = useGetPosts();
   const { followers, isLoading: followersLoading } = useGetFollowers();
+  const { followUser, isLoading: followLoading } = useFollowUser();
+  const { unfollowUser, isLoading: unfollowLoading } = useUnfollowUser();
   const [isEditModalVisible, setEditModalVisible] = useState(false);
   const [isPostModalVisible, setPostModalVisible] = useState(false);
+  const [isFollowersModalVisible, setIsFollowersModalVisible] = useState(false);
+  const [isFollowingsModalVisible, setIsFollowingsModalVisible] =
+    useState(false);
   const [selectedPost, setSelectedPost] = useState(null);
-
+  const { username } = useParams();
   function postsCountForUser(userId) {
     return posts?.data.filter((post) => post.user_id === userId).length;
   }
@@ -31,11 +38,13 @@ function ProfileComponent() {
     userLoading ||
     interactionsLoading ||
     postsLoading ||
-    followersLoading
+    followersLoading ||
+    followLoading ||
+    unfollowLoading
   ) {
     return <div className="loader" />;
   }
-  const currentUser = users.data?.find((u) => u.id === user?.id);
+  const currentUser = users.data?.find((u) => u.username === username) || user;
 
   const userPosts = posts?.data.filter(
     (post) => post.user_id === currentUser?.id,
@@ -63,6 +72,44 @@ function ProfileComponent() {
     setSelectedPost(null);
   };
 
+  const isCurrentUser = currentUser?.id === user?.id;
+
+  const handleFollow = () => {
+    followUser({
+      follower_id: user.id,
+      followed_id: currentUser.id,
+    });
+  };
+
+  const handleUnfollow = () => {
+    unfollowUser(currentUser.id);
+  };
+
+  const handleFollowersClick = () => {
+    setIsFollowersModalVisible(true);
+  };
+
+  const handleFollowingsClick = () => {
+    setIsFollowingsModalVisible(true);
+  };
+
+  const userFollowers = users.data.filter(
+    (u) =>
+      followers?.data.some((f) => f.follower_id === u.id) &&
+      u.id !== currentUser?.id,
+  );
+
+  const userFollowings = users.data.filter(
+    (u) =>
+      followers?.data.some((f) => f.followed_id === u.id) &&
+      u.id !== currentUser?.id,
+  );
+
+  const isFollowing = followers?.data.some(
+    (follower) =>
+      follower.follower_id === user?.id &&
+      follower.followed_id === currentUser?.id,
+  );
   return currentUser ? (
     <MyProfile
       avatar={currentUser.avatar_url}
@@ -75,6 +122,7 @@ function ProfileComponent() {
       key={currentUser.id}
       followers={userFollowersCount}
       followed={userFollowedCount}
+      followersArr={followers?.data}
       handleEditProfile={handleEditProfile}
       isEditModalVisible={isEditModalVisible}
       setEditModalVisible={setEditModalVisible}
@@ -82,6 +130,18 @@ function ProfileComponent() {
       selectedPost={selectedPost}
       handleClosePostModal={handleClosePostModal}
       handlePostClick={handlePostClick}
+      isCurrentUser={isCurrentUser}
+      isFollowing={isFollowing}
+      onFollow={handleFollow}
+      onUnfollow={handleUnfollow}
+      isFollowersModalVisible={isFollowersModalVisible}
+      isFollowingsModalVisible={isFollowingsModalVisible}
+      setIsFollowersModalVisible={setIsFollowersModalVisible}
+      setIsFollowingsModalVisible={setIsFollowingsModalVisible}
+      handleFollowersClick={handleFollowersClick}
+      handleFollowingsClick={handleFollowingsClick}
+      userFollowers={userFollowers}
+      userFollowings={userFollowings}
     />
   ) : (
     <div className="text-center text-xl font-light text-gray-600 md:text-3xl">

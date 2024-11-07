@@ -11,6 +11,8 @@ import { useInfiniteScroll } from "./useInfiniteScroll";
 import Modal from "../../ui/Modal";
 import Comments from "./CommentsModal";
 import { useInteraction } from "./useInteraction";
+import MapModal from "./MapModal";
+import { useFetchCoordinates } from "./useGetCoordinates";
 
 function Posts() {
   const [allPosts, setAllPosts] = useState([]);
@@ -36,6 +38,15 @@ function Posts() {
     incrementPage,
   );
 
+  const [selectedLocation, setSelectedLocation] = useState("");
+  const [isMapModalVisible, setMapModalVisible] = useState(false);
+
+  const {
+    data: coordinates,
+    isLoading,
+    error,
+  } = useFetchCoordinates(selectedLocation);
+
   const [isCommentModalVisible, setCommentModalVisible] = useState(false);
   const [selectedPostId, setSelectedPostId] = useState(null);
   const { toggleInteraction, isLiked, isDisliked } = useInteraction();
@@ -49,6 +60,17 @@ function Posts() {
     setCommentModalVisible(false);
     setSelectedPostId(null);
   };
+
+  const openLocationModal = (loc) => {
+    setSelectedLocation(loc);
+    setMapModalVisible(true);
+  };
+
+  const closeLocationModal = () => {
+    setMapModalVisible(false);
+    setSelectedLocation("");
+  };
+
   useEffect(() => {
     if (posts?.data) {
       if (page === 1) {
@@ -102,6 +124,10 @@ function Posts() {
             isLiked={isLiked(post.id)}
             isDisliked={isDisliked(post.id)}
             onOpenCommentModal={() => openCommentModal(post.id)}
+            username={
+              users?.data?.find((user) => user.id === post.user_id)?.username
+            }
+            onOpenLocationModal={() => openLocationModal(post.location)}
           />
         ))}
       <Modal
@@ -111,6 +137,14 @@ function Posts() {
       >
         {selectedPostId && <Comments postId={selectedPostId} />}
       </Modal>
+      <MapModal
+        latitude={coordinates?.latitude}
+        longitude={coordinates?.longitude}
+        isVisible={isMapModalVisible}
+        onClose={closeLocationModal}
+        isLoading={isLoading}
+        error={error}
+      />
 
       {!hasMore && <p className="text-gray-500">No more posts</p>}
     </div>

@@ -8,7 +8,6 @@ import LoginForm from "./pages/Login.jsx";
 import ProtectedRoute from "./ui/ProtectedRoute.jsx";
 import ForgotPasswordForm from "./pages/ForgotPassword.jsx";
 import ResetPasswordForm from "./pages/ResetPassword.jsx";
-import PageNotFound from "./ui/PageNotFound.jsx";
 import Container from "./components/Container.jsx";
 
 const queryClient = new QueryClient({
@@ -39,7 +38,6 @@ function App() {
         <Route path="signup" element={<RegisterForm />} />
         <Route path="forgot-password" element={<ForgotPasswordForm />} />
         <Route path="reset-password" element={<ResetPasswordForm />} />
-        <Route path="*" element={<PageNotFound />} />
       </Routes>
       <Toaster
         position="top-center"

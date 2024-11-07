@@ -7,7 +7,7 @@ function PageNotFound() {
     navigate("/", { replace: true });
   }
   return (
-    <div className="flex h-screen flex-col items-center justify-center gap-5">
+    <div className="flex h-[90%] flex-col items-center justify-center gap-5">
       <h1 className="text-2xl font-light">Page Not Found</h1>
       <Button onClick={handleClick}>Go Home</Button>
     </div>

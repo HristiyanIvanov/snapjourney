@@ -1,5 +1,6 @@
 import { forwardRef } from "react";
 import { GoComment, GoThumbsdown, GoThumbsup } from "react-icons/go";
+import { Link } from "react-router-dom";
 
 function Post(
   {
@@ -16,6 +17,8 @@ function Post(
     isLiked,
     isDisliked,
     onOpenCommentModal,
+    username,
+    onOpenLocationModal,
   },
   ref,
 ) {
@@ -25,21 +28,36 @@ function Post(
       className="flex size-4/5 flex-col gap-5 rounded-xl border border-gray-300 bg-gray-50 px-5 py-6 font-light text-gray-600"
     >
       <div className="flex flex-row items-center justify-between gap-2">
-        <div className="flex flex-row items-center gap-2">
-          <img
-            className="size-16 rounded-full"
-            src={profile_pic}
-            alt="Profile pic"
-          />
+        <div className="group flex flex-row items-center gap-2">
+          <Link to={`/profile/${username}`}>
+            <img
+              className="size-16 cursor-pointer rounded-full duration-200 ease-in-out group-hover:scale-105 group-hover:shadow-lg"
+              src={profile_pic}
+              alt="Profile pic"
+            />
+          </Link>
           <div>
-            <h1 className="text-lg font-light sm:block sm:text-xl lg:text-2xl">
-              {name}
-            </h1>
+            <Link to={`/profile/${username}`} className="cursor-pointer">
+              <h1 className="relative z-0 cursor-pointer text-lg font-light transition-colors duration-200 ease-in-out group-hover:text-teal-600 sm:block sm:text-xl lg:text-2xl">
+                {name}
+                <span className="absolute bottom-0 left-0 h-0.5 w-full origin-left scale-x-0 bg-teal-600 transition-transform duration-200 ease-in-out group-hover:scale-x-100"></span>
+              </h1>
+            </Link>
             <p className="text-sm sm:text-base">{time_ago}</p>
-            <h1 className="block text-sm sm:text-base md:hidden">{location}</h1>
+            <h1
+              className="block text-sm sm:text-base md:hidden"
+              onClick={onOpenLocationModal}
+            >
+              {location}
+            </h1>
           </div>
         </div>
-        <h1 className="hidden md:block">{location}</h1>
+        <h1
+          className="hidden hover:cursor-pointer md:block"
+          onClick={onOpenLocationModal}
+        >
+          {location}
+        </h1>
       </div>
       <div className="text-lg sm:block md:text-xl lg:text-2xl">
         {description}
