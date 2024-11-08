@@ -15,7 +15,7 @@ function NotificationMobile({
 }) {
   return (
     isNotificationsOpen && (
-      <div className="fixed inset-0 top-1 z-50 mx-auto h-[92vh] w-full overflow-y-auto bg-white p-4 shadow-lg">
+      <div className="fixed inset-0 top-0 z-50 mx-auto h-[90vh] w-full overflow-y-auto bg-white p-4 shadow-lg">
         <div className="mb-4 flex items-center justify-between">
           <h2 className="text-xl font-semibold">Notifications</h2>
           <div
