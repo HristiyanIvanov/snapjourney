@@ -7,6 +7,7 @@ import { useGetFollowers } from "./useGetFollowers";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { useFollowUser, useUnfollowUser } from "./useFollowers";
+import { useCreateNotification } from "../notifications/useNotifications";
 
 function ProfileComponent() {
   const { users, isLoading: usersLoading } = useGetUsers();
@@ -16,6 +17,7 @@ function ProfileComponent() {
   const { followers, isLoading: followersLoading } = useGetFollowers();
   const { followUser, isLoading: followLoading } = useFollowUser();
   const { unfollowUser, isLoading: unfollowLoading } = useUnfollowUser();
+  const { createNewNotification } = useCreateNotification();
   const [isEditModalVisible, setEditModalVisible] = useState(false);
   const [isPostModalVisible, setPostModalVisible] = useState(false);
   const [isFollowersModalVisible, setIsFollowersModalVisible] = useState(false);
@@ -78,6 +80,11 @@ function ProfileComponent() {
     followUser({
       follower_id: user.id,
       followed_id: currentUser.id,
+    });
+    createNewNotification({
+      type: "follow",
+      trigger_user_id: user.id,
+      target_user_id: currentUser.id,
     });
   };
 

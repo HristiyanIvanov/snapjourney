@@ -31,7 +31,6 @@ function App() {
           }
         >
           <Route index element={<Container />} />
-          <Route path="profile/:username" element={<Container />} />
         </Route>
 
         <Route path="login" element={<LoginForm />} />

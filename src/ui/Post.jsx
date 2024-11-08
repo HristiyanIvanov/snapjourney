@@ -62,6 +62,7 @@ function Post(
       <div className="text-lg sm:block md:text-xl lg:text-2xl">
         {description}
       </div>
+
       <img className="size-auto" src={postImage} alt="Post image" />
       <div className="border-t border-gray-400"></div>
       <div className="flex flex-row items-center justify-between gap-2">

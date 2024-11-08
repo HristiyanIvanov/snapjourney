@@ -135,7 +135,7 @@ function Posts() {
         onClose={closeCommentModal}
         title="Comments"
       >
-        {selectedPostId && <Comments postId={selectedPostId} />}
+        {selectedPostId && <Comments postId={selectedPostId} posts={posts} />}
       </Modal>
       <MapModal
         latitude={coordinates?.latitude}

@@ -3,7 +3,7 @@ import Button from "../../ui/Button";
 import { timeAgo } from "../../utils/convertDate";
 import { GoPencil, GoTrash } from "react-icons/go";
 
-function Comments({ postId }) {
+function Comments({ postId, posts }) {
   const {
     comments,
     visibleCommentsCount,
@@ -21,7 +21,7 @@ function Comments({ postId }) {
     editingCommentId,
     users,
     user,
-  } = useComment(postId);
+  } = useComment(postId, posts);
 
   if (commentsLoading || createCommentLoading)
     return <div className="loader" />;

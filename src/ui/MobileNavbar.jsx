@@ -4,7 +4,7 @@ import Logout from "../components/auth/Logout";
 import { useGetUsers } from "../components/profile/useGetUsers";
 import { useUser } from "../components/auth/useUser";
 
-function MobileNavbar() {
+function MobileNavbar({ toggleNotifications, isNotificationsOpen }) {
   const location = useLocation();
   const isActive = (path) => location.pathname === path;
   const { users, isLoading: usersLoading } = useGetUsers();
@@ -39,14 +39,14 @@ function MobileNavbar() {
           </Link>
         )}
 
-        <Link to="/notifications">
+        <button onClick={toggleNotifications}>
           <div
-            className={`flex flex-col items-center ${isActive("/notifications") ? "text-teal-500" : "text-gray-600"}`}
+            className={`flex flex-col items-center ${isNotificationsOpen ? "text-teal-500" : "text-gray-600"}`}
           >
             <GoBell className="text-2xl" />
             <span className="text-xs">Notifications</span>
           </div>
-        </Link>
+        </button>
 
         <Link to="/settings">
           <div

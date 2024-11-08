@@ -5,7 +5,7 @@ import Logout from "../components/auth/Logout";
 import { useGetUsers } from "../components/profile/useGetUsers";
 import { useUser } from "../components/auth/useUser";
 
-function Sidebar() {
+function Sidebar({ toggleNotifications, isNotificationsOpen }) {
   const location = useLocation();
   const { users } = useGetUsers();
   const { user } = useUser();
@@ -34,13 +34,13 @@ function Sidebar() {
           isActive={location.pathname === `/profile/${currentUser?.username}`}
         />
       </Link>
-      <Link to="/notifications">
+      <button onClick={toggleNotifications}>
         <SideBarItem
           icon={<GoBell />}
           title="Notifications"
-          isActive={location.pathname === "/notifications"}
+          isActive={isNotificationsOpen}
         />
-      </Link>
+      </button>
       <Link to="/settings">
         <SideBarItem
           icon={<GoGear />}

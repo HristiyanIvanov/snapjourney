@@ -8,8 +8,8 @@ import {
 import { useUser } from "../auth/useUser";
 import { useGetUsers } from "../profile/useGetUsers";
 import toast from "react-hot-toast";
-
-export const useComment = (postId) => {
+import { useCreateNotification } from "../notifications/useNotifications";
+export const useComment = (postId, posts) => {
   const [visibleCommentsCount, setVisibleCommentsCount] = useState(5);
   const { comments, isLoading: commentsLoading } = useGetComments(postId);
   const { createNewComment, isLoading: createCommentLoading } =
@@ -20,8 +20,11 @@ export const useComment = (postId) => {
   const { users } = useGetUsers();
   const { deleteExistingComment } = useDeleteComment();
   const { updateExistingComment } = useUpdateComment();
+  const { createNewNotification } = useCreateNotification();
   const [editingCommentId, setEditingCommentId] = useState(null);
-
+  const userCreatedPost = posts?.data?.find(
+    (post) => post.id === postId,
+  )?.user_id;
   const handleAddComment = async (e) => {
     e.preventDefault();
     if (newComment.trim()) {
@@ -31,6 +34,14 @@ export const useComment = (postId) => {
         comment: newComment,
       });
       setNewComment("");
+      if (user?.id !== userCreatedPost) {
+        createNewNotification({
+          type: "comment",
+          trigger_user_id: user?.id,
+          target_user_id: userCreatedPost,
+          related_post_id: postId,
+        });
+      }
     } else {
       toast.error("Comment cannot be empty");
     }
