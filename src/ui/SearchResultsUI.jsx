@@ -2,7 +2,7 @@ import Button from "./Button";
 
 function SearchResultsUI({ query, isLoading, users, handleUserClick, goBack }) {
   return (
-    <div className="mx-auto max-w-xl rounded-lg border border-gray-300 bg-gray-50 p-6 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300 dark:shadow-gray-900/50">
+    <div className="mx-auto w-[100%] rounded-lg border border-gray-300 bg-gray-50 p-6 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300 dark:shadow-gray-900/50">
       <div className="mb-4 flex items-center justify-between">
         <h1 className="text-2xl font-semibold">Search Results</h1>
         <Button color="gray" onClick={goBack}>

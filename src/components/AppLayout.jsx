@@ -18,14 +18,14 @@ function AppLayout() {
     setIsNotificationsOpen(!isNotificationsOpen);
   };
   return (
-    <div className="m-auto grid grid-cols-3 gap-4 sm:grid-cols-6 dark:bg-gray-900">
-      <div className="sticky top-0 hidden h-screen md:block">
+    <div className="m-auto grid grid-cols-3 gap-4 sm:grid-cols-7 dark:bg-gray-900">
+      <div className="sticky top-0 col-span-2 hidden h-screen md:block">
         <Sidebar
           toggleNotifications={toggleNotifications}
           isNotificationsOpen={isNotificationsOpen}
         />
       </div>
-      <div className="col-span-3 pb-14 pt-5 sm:col-span-4 sm:col-start-2">
+      <div className="col-span-3 pb-14 pt-5 sm:col-span-4 sm:col-start-3">
         <Container />
       </div>
       <MobileNavbar

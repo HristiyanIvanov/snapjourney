@@ -35,7 +35,7 @@ function MyProfile({
   userFollowings,
 }) {
   return (
-    <div className="flex flex-col items-center p-8 md:w-full">
+    <div className="flex flex-col items-center p-8 md:w-[100%]">
       <div className="flex flex-col items-center p-4 md:w-2/4">
         <div className="mb-4 h-32 w-32 overflow-hidden rounded-full md:h-40 md:w-40">
           <img

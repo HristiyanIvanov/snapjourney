@@ -9,7 +9,7 @@ function SideBarItem({ icon, title, isActive }) {
         {icon}
       </div>
       <h1
-        className={`hidden font-light md:block md:text-xl lg:text-2xl ${isActive ? "text-teal-500 dark:text-teal-400" : "text-gray-600 dark:text-gray-300"}`}
+        className={`font-light md:text-xl lg:text-2xl ${isActive ? "text-teal-500 dark:text-teal-400" : "text-gray-600 dark:text-gray-300"} break-words`}
       >
         {title}
       </h1>

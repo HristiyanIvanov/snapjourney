@@ -35,7 +35,7 @@ function Post(
   return (
     <div
       ref={ref}
-      className="flex size-4/5 flex-col gap-5 rounded-xl border border-gray-300 bg-gray-50 px-5 py-6 font-light text-gray-600 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300"
+      className="flex w-[100%] flex-col gap-5 rounded-xl border border-gray-300 bg-gray-50 px-5 py-6 font-light text-gray-600 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300"
     >
       <div className="flex flex-row items-center justify-between gap-2">
         <div className="group flex flex-row items-center gap-2">
@@ -86,7 +86,7 @@ function Post(
             onClick={onLike}
           >
             <GoThumbsup />
-            <p className="hidden sm:block">Like</p>
+            <p className="hidden md:block">Like</p>
             <p
               className={`rounded-full transition-all duration-300 ${isLiked ? "bg-blue-300 dark:bg-gray-700 dark:text-white" : "bg-gray-200 dark:bg-gray-700 dark:text-white"} px-2`}
             >
@@ -102,7 +102,7 @@ function Post(
             onClick={onDislike}
           >
             <GoThumbsdown />
-            <p className="hidden sm:block">Dislike</p>
+            <p className="hidden md:block">Dislike</p>
             <p
               className={`rounded-full transition-all duration-300 ${isDisliked ? "bg-red-300 dark:bg-gray-700 dark:text-white" : "bg-gray-200 dark:bg-gray-700 dark:text-white"} px-2`}
             >
@@ -114,7 +114,7 @@ function Post(
             onClick={onOpenCommentModal}
           >
             <GoComment />
-            <p className="hidden sm:block">Comment</p>
+            <p className="hidden md:block">Comment</p>
           </button>
         </div>
         {currUserPosts && (
@@ -124,13 +124,13 @@ function Post(
               onClick={onEditPost}
             >
               <GoPencil />
-              <p className="hidden sm:block">Edit</p>
+              <p className="hidden md:block">Edit</p>
             </button>
             <button
               className="flex items-center gap-2 text-xl text-gray-600 hover:text-red-600 dark:text-gray-300 dark:hover:text-red-400"
               onClick={onDeletePost}
             >
-              <GoTrash /> <p className="hidden sm:block">Delete</p>
+              <GoTrash /> <p className="hidden md:block">Delete</p>
             </button>
           </div>
         )}

@@ -10,8 +10,10 @@ function Logout({ isMobile }) {
       {!isLoading ? (
         isMobile ? (
           <div className="flex flex-col items-center">
-            <GoSignOut className="text-2xl text-gray-600" />
-            <span className="text-xs text-gray-500">Log out</span>
+            <GoSignOut className="text-2xl text-gray-600 dark:text-gray-300" />
+            <span className="text-xs text-gray-500 dark:text-gray-300">
+              Log out
+            </span>
           </div>
         ) : (
           <SideBarItem icon={<GoSignOut />} title="Log out" />
