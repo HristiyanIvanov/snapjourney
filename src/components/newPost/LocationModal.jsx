@@ -36,7 +36,7 @@ function LocationModal({
                 {...getInputProps({
                   placeholder: "Enter location",
                   className:
-                    "w-full p-3 border border-gray-300 rounded-lg outline-teal-400",
+                    "w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300",
                 })}
               />
               <div className="mt-2 rounded-lg shadow-md">
@@ -46,8 +46,8 @@ function LocationModal({
                   const { key, ...suggestionProps } =
                     getSuggestionItemProps(suggestion);
                   const className = suggestion.active
-                    ? "p-2 bg-teal-100 cursor-pointer"
-                    : "p-2 bg-white cursor-pointer";
+                    ? "p-2 bg-teal-100 cursor-pointer  dark:bg-gray-700"
+                    : "p-2 bg-white cursor-pointer  dark:bg-gray-800";
 
                   return (
                     <div

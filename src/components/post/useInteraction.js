@@ -74,5 +74,5 @@ export function useInteraction() {
         interaction.type === "dislike",
     );
 
-  return { toggleInteraction, isLiked, isDisliked };
+  return { toggleInteraction, isLiked, isDisliked, user };
 }

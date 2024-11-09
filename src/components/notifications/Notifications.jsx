@@ -46,7 +46,7 @@ function Notifications({ isNotificationsOpen, toggleNotifications, isMobile }) {
     });
   };
 
-  if (isLoading || isLoadingUsers) return <div className="loader" />;
+  if (isLoading || isLoadingUsers) return null;
   return (
     <>
       {!isMobile ? (

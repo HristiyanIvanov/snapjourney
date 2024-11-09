@@ -76,3 +76,46 @@ export async function deleteUser(id) {
   }
   return data;
 }
+
+export async function searchUsers(query) {
+  const { data, error } = await supabase
+    .from("users")
+    .select("id, full_name, username, avatar_url")
+    .or(`full_name.ilike.%${query}%,username.ilike.%${query}%`);
+
+  if (error) {
+    console.error("Error fetching users:", error);
+    throw new Error("Failed to fetch users");
+  }
+
+  return data;
+}
+export async function getFollowedUsers(currentUserId) {
+  const { data: followedUsersData, error: followedUsersError } = await supabase
+    .from("followers")
+    .select("followed_id")
+    .eq("follower_id", currentUserId);
+
+  if (followedUsersError) {
+    console.error(followedUsersError);
+    throw new Error("Failed to fetch followed users");
+  }
+
+  if (!followedUsersData || followedUsersData.length === 0) {
+    return [];
+  }
+
+  const followedUserIds = followedUsersData.map((item) => item.followed_id);
+
+  const { data, error } = await supabase
+    .from("users")
+    .select("*")
+    .in("id", followedUserIds);
+
+  if (error) {
+    console.error(error);
+    throw new Error("Failed to fetch followed users' data");
+  }
+
+  return data;
+}

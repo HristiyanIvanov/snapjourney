@@ -101,15 +101,17 @@ function ProfileComponent() {
   };
 
   const userFollowers = users.data.filter(
-    (u) =>
-      followers?.data.some((f) => f.follower_id === u.id) &&
-      u.id !== currentUser?.id,
+    (user) =>
+      followers?.data.some(
+        (f) => f.follower_id === user.id && f.followed_id === currentUser?.id,
+      ) && user.id !== currentUser?.id,
   );
 
   const userFollowings = users.data.filter(
-    (u) =>
-      followers?.data.some((f) => f.followed_id === u.id) &&
-      u.id !== currentUser?.id,
+    (user) =>
+      followers?.data.some(
+        (f) => f.follower_id === currentUser?.id && f.followed_id === user.id,
+      ) && user.id !== currentUser?.id,
   );
 
   const isFollowing = followers?.data.some(

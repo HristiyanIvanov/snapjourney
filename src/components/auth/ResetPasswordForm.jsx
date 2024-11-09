@@ -20,7 +20,7 @@ function ResetPassword() {
 
   return (
     <form
-      className="flex flex-col gap-5 rounded-xl border border-gray-300 bg-gray-50 px-5 py-6 font-light text-gray-600"
+      className="flex flex-col gap-5 rounded-xl border border-gray-300 bg-gray-50 px-5 py-6 font-light text-gray-600 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300"
       onSubmit={handleResetPassword}
     >
       <h1 className="text-2xl font-light">Reset Password</h1>
@@ -33,7 +33,7 @@ function ResetPassword() {
           value={newPassword}
           onChange={(e) => setNewPassword(e.target.value)}
           disabled={isLoading}
-          className="w-80 rounded-lg border border-gray-200 p-2 outline-teal-400"
+          className="w-80 rounded-lg border border-gray-200 p-2 outline-teal-400 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300 dark:outline-gray-600"
         />
       </div>
       <div label="Confirm Password">
@@ -45,12 +45,12 @@ function ResetPassword() {
           value={confirmPassword}
           onChange={(e) => setConfirmPassword(e.target.value)}
           disabled={isLoading}
-          className="w-80 rounded-lg border border-gray-200 p-2 outline-teal-400"
+          className="w-80 rounded-lg border border-gray-200 p-2 outline-teal-400 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300 dark:outline-gray-600"
         />
       </div>
       <button
         type="submit"
-        className="w-28 rounded-lg bg-teal-500 p-2 text-white hover:bg-teal-600"
+        className="w-28 rounded-lg bg-teal-500 p-2 text-white hover:bg-teal-600 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300 dark:outline-gray-600"
         disabled={isLoading}
       >
         {isLoading ? <div className="loader" /> : "Reset Password"}

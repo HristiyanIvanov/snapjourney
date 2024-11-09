@@ -124,20 +124,20 @@ function EditProfileModal({ isVisible, onClose }) {
             placeholder="Full Name"
             value={fullName}
             onChange={(e) => setFullName(e.target.value)}
-            className="w-full rounded-lg border border-gray-200 p-2 outline-teal-400"
+            className="-700 w-full rounded-lg border border-gray-200 p-2 focus:outline-none focus:ring-2 focus:ring-teal-500 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300"
           />
           <input
             type="text"
             placeholder="Username"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
-            className="w-full rounded-lg border border-gray-200 p-2 outline-teal-400"
+            className="w-full rounded-lg border border-gray-200 p-2 focus:outline-none focus:ring-2 focus:ring-teal-500 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300"
           />
           <textarea
             placeholder="Bio"
             value={bio}
             onChange={(e) => setBio(e.target.value)}
-            className="w-full rounded-lg border border-gray-200 p-2 outline-teal-400"
+            className="w-full rounded-lg border border-gray-200 p-2 focus:outline-none focus:ring-2 focus:ring-teal-500 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300"
           />
         </div>
         <Button color="teal" disabled={loading}>

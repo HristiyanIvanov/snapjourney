@@ -52,7 +52,7 @@ function ImageModal({
     >
       <div className="py-6 md:w-96">
         <div
-          className={`flex cursor-pointer items-center justify-center rounded-lg border-2 border-dashed p-6 text-center transition-colors ${dragActive ? "border-teal-500 bg-blue-50" : "border-gray-300 bg-gray-50"}`}
+          className={`flex cursor-pointer items-center justify-center rounded-lg border-2 border-dashed p-6 text-center transition-colors ${dragActive ? "border-teal-500 bg-blue-50 dark:border-teal-400 dark:bg-teal-900" : "border-gray-300 bg-gray-50 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300"}`}
           onDragOver={handleDragOver}
           onDragLeave={handleDragLeave}
           onDrop={handleDrop}

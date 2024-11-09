@@ -17,11 +17,11 @@ function MobileNavbar({ toggleNotifications, isNotificationsOpen }) {
   }
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 border-t border-gray-300 bg-white shadow-lg md:hidden">
+    <div className="fixed bottom-0 left-0 right-0 border-t border-gray-300 bg-white shadow-lg md:hidden dark:border-gray-600 dark:bg-gray-800">
       <div className="flex justify-around py-3">
         <Link to="/">
           <div
-            className={`flex flex-col items-center ${isActive("/") ? "text-teal-500" : "text-gray-600"}`}
+            className={`flex flex-col items-center ${isActive("/") ? "text-teal-500 dark:text-teal-400" : "text-gray-600 dark:text-gray-300"}`}
           >
             <GoHome className="text-2xl" />
             <span className="text-xs">Home</span>
@@ -31,7 +31,7 @@ function MobileNavbar({ toggleNotifications, isNotificationsOpen }) {
         {currentUser && (
           <Link to={`/profile/${currentUser.username}`}>
             <div
-              className={`flex flex-col items-center ${isActive(`/profile/${currentUser.username}`) ? "text-teal-500" : "text-gray-600"}`}
+              className={`flex flex-col items-center ${isActive(`/profile/${currentUser.username}`) ? "text-teal-500 dark:text-teal-400" : "text-gray-600 dark:text-gray-300"}`}
             >
               <GoPerson className="text-2xl" />
               <span className="text-xs">Profile</span>
@@ -41,7 +41,7 @@ function MobileNavbar({ toggleNotifications, isNotificationsOpen }) {
 
         <button onClick={toggleNotifications}>
           <div
-            className={`flex flex-col items-center ${isNotificationsOpen ? "text-teal-500" : "text-gray-600"}`}
+            className={`flex flex-col items-center ${isNotificationsOpen ? "text-teal-500 dark:text-teal-400" : "text-gray-600 dark:text-gray-300"}`}
           >
             <GoBell className="text-2xl" />
             <span className="text-xs">Notifications</span>
@@ -50,7 +50,7 @@ function MobileNavbar({ toggleNotifications, isNotificationsOpen }) {
 
         <Link to="/settings">
           <div
-            className={`flex flex-col items-center ${isActive("/settings") ? "text-teal-500" : "text-gray-600"}`}
+            className={`flex flex-col items-center ${isActive("/settings") ? "text-teal-500 dark:text-teal-400" : "text-gray-600 dark:text-gray-300"}`}
           >
             <GoGear className="text-2xl" />
             <span className="text-xs">Settings</span>

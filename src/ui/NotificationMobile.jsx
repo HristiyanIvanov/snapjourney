@@ -15,11 +15,11 @@ function NotificationMobile({
 }) {
   return (
     isNotificationsOpen && (
-      <div className="fixed inset-0 top-0 z-50 mx-auto h-[90vh] w-full overflow-y-auto bg-white p-4 shadow-lg">
+      <div className="fixed inset-0 top-0 z-50 mx-auto h-[90vh] w-full overflow-y-auto bg-white p-4 shadow-lg dark:bg-gray-800 dark:text-gray-300">
         <div className="mb-4 flex items-center justify-between">
           <h2 className="text-xl font-semibold">Notifications</h2>
           <div
-            className="text-2xl hover:cursor-pointer hover:text-red-400"
+            className="text-2xl hover:cursor-pointer hover:text-red-400 dark:text-gray-300"
             onClick={toggleNotifications}
           >
             <GoX />
@@ -31,13 +31,13 @@ function NotificationMobile({
         ).length > 0 && (
           <div className="mb-4 flex justify-between">
             <button
-              className="text-teal-500 hover:text-teal-700"
+              className="text-teal-500 hover:text-teal-700 dark:text-teal-400 dark:hover:text-teal-600"
               onClick={markAllAsRead}
             >
               Mark all as read
             </button>
             <button
-              className="text-teal-500 hover:text-teal-700"
+              className="text-teal-500 hover:text-teal-700 dark:text-teal-400 dark:hover:text-teal-600"
               onClick={markAllAsUnread}
             >
               Mark all as unread
@@ -48,7 +48,7 @@ function NotificationMobile({
         {notifications.filter(
           (notification) => notification.trigger_user_id !== currentUser?.id,
         ).length === 0 && (
-          <p className="text-gray-500">
+          <p className="text-gray-500 dark:text-gray-300">
             You have no notifications at the moment.
           </p>
         )}
@@ -67,17 +67,15 @@ function NotificationMobile({
               );
 
               const notificationStyle = notification.is_read
-                ? "bg-gray-100 text-gray-600"
-                : "bg-teal-50 text-teal-700 font-semibold";
+                ? "bg-gray-100 text-gray-600  dark:bg-gray-700 dark:text-gray-300"
+                : "bg-teal-50 text-teal-700 font-semibold  dark:bg-gray-700 dark:text-teal-400";
 
               return (
                 <div
                   key={notification.id}
                   className={`rounded-lg p-3 ${notificationStyle} hover:cursor-pointer`}
                   onClick={() => {
-                    if (notification.is_read) {
-                      markAsUnread(notification.id);
-                    } else {
+                    if (!notification.is_read) {
                       markAsRead(notification.id);
                     }
                   }}
@@ -98,9 +96,15 @@ function NotificationMobile({
                       </div>
                     </div>
                     {notification.is_read ? (
-                      <GoEyeClosed className="ml-5 text-xl" />
+                      <GoEyeClosed
+                        className="ml-5 text-xl duration-300 hover:text-teal-700 dark:hover:text-teal-600"
+                        onClick={() => markAsUnread(notification.id)}
+                      />
                     ) : (
-                      <GoEye className="ml-5 text-xl" />
+                      <GoEye
+                        className="ml-5 text-xl duration-300 hover:text-gray-700 dark:hover:text-gray-300"
+                        onClick={() => markAsRead(notification.id)}
+                      />
                     )}
                   </div>
                 </div>
@@ -112,7 +116,7 @@ function NotificationMobile({
           (notification) => notification.trigger_user_id !== currentUser?.id,
         ).length > 0 && (
           <button
-            className="mt-4 w-full py-2 text-teal-500 hover:text-teal-700"
+            className="mt-4 w-full py-2 text-teal-500 hover:text-teal-700 dark:text-teal-400 dark:hover:text-teal-600"
             onClick={deleteNotifications}
           >
             Delete all

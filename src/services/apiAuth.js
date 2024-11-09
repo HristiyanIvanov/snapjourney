@@ -79,6 +79,24 @@ export async function logout() {
   if (error) throw new Error(error.message);
 }
 
+export async function changePassword(newPassword) {
+  const { user, error } = await supabase.auth.updateUser({
+    password: newPassword,
+  });
+
+  if (error) throw new Error(error.message);
+  return user;
+}
+
+export async function deleteAccount(id) {
+  await supabase.auth.signOut();
+
+  const { data, error } = await supabase.from("users").delete().eq("id", id);
+  if (error) throw new Error(error.message);
+
+  return data;
+}
+
 export async function updateCurrentUser({ password, fullName, avatar }) {
   let updateData;
   if (password) updateData = { password };

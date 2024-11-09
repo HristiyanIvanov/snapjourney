@@ -35,7 +35,7 @@ function Register() {
 
   return (
     <form
-      className="flex flex-col gap-5 rounded-xl border border-gray-300 bg-gray-50 px-5 py-6 font-light text-gray-600"
+      className="flex flex-col gap-5 rounded-xl border border-gray-300 bg-gray-50 px-5 py-6 font-light text-gray-600 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300"
       onSubmit={handleSubmit}
     >
       <h1 className="text-2xl font-light">Register new account</h1>
@@ -49,7 +49,7 @@ function Register() {
           value={fullName}
           onChange={(e) => setFullName(e.target.value)}
           disabled={isLoading}
-          className="w-80 rounded-lg border border-gray-200 p-2 outline-teal-400"
+          className="w-80 rounded-lg border border-gray-200 p-2 outline-teal-400 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300 dark:outline-gray-600"
         />
       </div>
       <div label="Username">
@@ -62,7 +62,7 @@ function Register() {
           value={username}
           onChange={(e) => setUsername(e.target.value)}
           disabled={isLoading}
-          className="w-80 rounded-lg border border-gray-200 p-2 outline-teal-400"
+          className="w-80 rounded-lg border border-gray-200 p-2 outline-teal-400 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300 dark:outline-gray-600"
         />
       </div>
       <div label="Email address">
@@ -75,7 +75,7 @@ function Register() {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           disabled={isLoading}
-          className="w-80 rounded-lg border border-gray-200 p-2 outline-teal-400"
+          className="w-80 rounded-lg border border-gray-200 p-2 outline-teal-400 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300 dark:outline-gray-600"
         />
       </div>
 
@@ -89,7 +89,7 @@ function Register() {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           disabled={isLoading}
-          className="w-80 rounded-lg border border-gray-200 p-2 outline-teal-400"
+          className="w-80 rounded-lg border border-gray-200 p-2 outline-teal-400 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300 dark:outline-gray-600"
         />
       </div>
       <div label="Confirm Password">
@@ -101,7 +101,7 @@ function Register() {
           value={confirmPassword}
           onChange={(e) => setConfirmPassword(e.target.value)}
           disabled={isLoading}
-          className="w-80 rounded-lg border border-gray-200 p-2 outline-teal-400"
+          className="w-80 rounded-lg border border-gray-200 p-2 outline-teal-400 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300 dark:outline-gray-600"
         />
       </div>
       <div className="flex flex-row items-center justify-between">

@@ -10,6 +10,7 @@ function FollowersFollowingModal({
   userFollowings,
 }) {
   const listToShow = isFollowers ? userFollowers : userFollowings;
+
   const handleUsernameClick = () => {
     onClose();
   };
@@ -25,7 +26,7 @@ function FollowersFollowingModal({
             <Link
               to={`/profile/${user.username}`}
               key={user.id}
-              className="flex items-center space-x-2 rounded-lg bg-gray-50 p-2 duration-300 hover:bg-gray-200"
+              className="flex items-center space-x-2 rounded-lg bg-gray-50 p-2 duration-300 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
               onClick={handleUsernameClick}
             >
               <div className="h-12 w-12 overflow-hidden rounded-full">
@@ -35,11 +36,13 @@ function FollowersFollowingModal({
                   className="h-full w-full object-cover"
                 />
               </div>
-              <p className="text-gray-800">{user.full_name}</p>
+              <p className="text-gray-800 dark:text-gray-300">
+                {user.full_name}
+              </p>
             </Link>
           ))
         ) : (
-          <p className="text-gray-600">
+          <p className="text-gray-600 dark:text-gray-400">
             No {isFollowers ? "followers" : "followings"} yet.
           </p>
         )}

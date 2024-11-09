@@ -93,8 +93,8 @@ function FullPostModal({ isVisible, onClose, post }) {
               onClick={() => toggleInteraction(post.id, "like")}
               className={`flex items-center gap-1 rounded-lg border border-blue-400 px-2 py-2 text-blue-400 transition-colors duration-300 ${
                 isLiked
-                  ? "bg-blue-400 text-white hover:bg-blue-500"
-                  : "text-blue-400 hover:bg-blue-500 hover:text-white"
+                  ? "bg-blue-400 text-white hover:bg-blue-500 dark:bg-blue-600 dark:hover:bg-blue-700 dark:hover:text-white"
+                  : "text-blue-400 hover:bg-blue-500 hover:text-white dark:bg-blue-600 dark:text-white dark:hover:bg-blue-700 dark:hover:text-white"
               }`}
             >
               <GoThumbsup className="h-5 w-5" />
@@ -104,8 +104,8 @@ function FullPostModal({ isVisible, onClose, post }) {
               onClick={() => toggleInteraction(post.id, "dislike")}
               className={`flex items-center gap-1 rounded-lg border border-red-400 px-2 py-2 text-red-400 transition-colors duration-300 ${
                 isDisliked
-                  ? "bg-red-400 text-white hover:bg-red-500"
-                  : "text-red-400 hover:bg-red-500 hover:text-white"
+                  ? "bg-red-400 text-white hover:bg-red-500 dark:bg-red-600 dark:hover:bg-red-700 dark:hover:text-white"
+                  : "text-red-400 hover:bg-red-500 hover:text-white dark:bg-red-600 dark:text-white dark:hover:bg-red-700 dark:hover:text-white"
               }`}
             >
               <GoThumbsdown className="h-5 w-5" />
@@ -115,18 +115,20 @@ function FullPostModal({ isVisible, onClose, post }) {
         </div>
 
         <div className="mt-4">
-          <h3 className="text-md font-semibold">Comments</h3>
+          <h3 className="text-md font-semibold text-gray-700 dark:text-gray-300">
+            Comments
+          </h3>
           {commentList && commentList.length > 0 ? (
             commentList.map((comment) => (
               <div
                 key={comment.id}
-                className="mb-2 border-b border-gray-200 pb-2"
+                className="mb-2 border-b border-gray-200 pb-2 dark:border-gray-600 dark:text-gray-300"
               >
                 <p className="break-words text-sm">
                   <Link
                     to={`/profile/${users?.data?.find((user) => user.id === comment.user_id)?.username}`}
                     onClick={handleUsernameClick}
-                    className="font-semibold text-teal-500 transition-colors hover:text-teal-600"
+                    className="font-semibold text-teal-500 transition-colors hover:text-teal-600 dark:text-teal-400"
                   >
                     {getCommentUserName(comment.user_id)}
                   </Link>
@@ -136,7 +138,7 @@ function FullPostModal({ isVisible, onClose, post }) {
                       type="text"
                       value={editedComment}
                       onChange={(e) => setEditedComment(e.target.value)}
-                      className="w-full rounded-lg border border-gray-200 p-1 outline-teal-400"
+                      className="w-full rounded-lg border border-gray-200 p-1 focus:outline-none focus:ring-2 focus:ring-teal-500 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300"
                     />
                   ) : (
                     comment.comment
@@ -171,17 +173,19 @@ function FullPostModal({ isVisible, onClose, post }) {
               </div>
             ))
           ) : (
-            <p className="text-sm text-gray-500">No comments yet.</p>
+            <p className="text-sm text-gray-500 dark:text-gray-400">
+              No comments yet.
+            </p>
           )}
         </div>
 
-        <div className="flex gap-2">
+        <div className="flex gap-2 pb-1 pl-1">
           <textarea
             type="text"
             value={newComment}
             onChange={(e) => setNewComment(e.target.value)}
             placeholder="Add a comment..."
-            className="w-full rounded-lg border border-gray-200 p-2 outline-teal-400"
+            className="w-full rounded-lg border border-gray-200 p-2 focus:outline-none focus:ring-2 focus:ring-teal-500 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300"
             rows={1}
           />
           <Button onClick={handleAddComment} color="teal">

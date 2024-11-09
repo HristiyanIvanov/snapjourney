@@ -29,7 +29,7 @@ function Comments({ postId, posts }) {
   return (
     <div className="max-h-[75vh] max-w-[90vw] overflow-y-auto">
       <form onSubmit={handleAddComment}>
-        <div className="flex max-w-3xl flex-col gap-2 divide-y divide-solid divide-gray-200 border-b border-gray-300 pb-2 text-gray-600">
+        <div className="flex max-w-3xl flex-col gap-2 divide-y divide-solid divide-gray-200 border-b border-gray-300 pb-2 text-gray-600 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300">
           {comments
             ?.slice(0, visibleCommentsCount)
             .sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
@@ -53,7 +53,7 @@ function Comments({ postId, posts }) {
                           )?.full_name
                         }
                       </h1>
-                      <span className="text-sm text-gray-400">
+                      <span className="text-sm text-gray-400 dark:text-gray-500">
                         {timeAgo(comment.created_at)}
                       </span>
                     </div>
@@ -78,10 +78,10 @@ function Comments({ postId, posts }) {
                   )}
                 </div>
                 {editingCommentId === comment.id ? (
-                  <div className="flex flex-row gap-2 pt-2">
+                  <div className="flex flex-row gap-2 pl-1 pt-2">
                     <textarea
                       type="text"
-                      className="w-full rounded-lg border border-gray-300 p-3 outline-teal-400"
+                      className="w-full rounded-lg border border-gray-300 p-3 focus:outline-none focus:ring-2 focus:ring-teal-500 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300"
                       placeholder="Edit your comment..."
                       value={editCommentText}
                       onChange={(e) => setEditCommentText(e.target.value)}
@@ -98,7 +98,7 @@ function Comments({ postId, posts }) {
                     </Button>
                   </div>
                 ) : (
-                  <p className="break-words text-sm text-gray-600 sm:text-base">
+                  <p className="break-words text-sm text-gray-600 sm:text-base dark:text-gray-300">
                     {comment.comment}
                   </p>
                 )}
@@ -110,10 +110,10 @@ function Comments({ postId, posts }) {
             <button onClick={handleLoadMoreComments}>Load More Comments</button>
           </div>
         )}
-        <div className="flex flex-row gap-2 pt-2">
+        <div className="flex flex-row gap-2 pb-1 pl-1 pt-2">
           <textarea
             type="text"
-            className="w-full rounded-lg border border-gray-300 p-3 outline-teal-400"
+            className="w-full rounded-lg border border-gray-300 p-3 focus:outline-none focus:ring-2 focus:ring-teal-500 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300"
             placeholder="Add a comment..."
             value={newComment}
             onChange={(e) => setNewComment(e.target.value)}

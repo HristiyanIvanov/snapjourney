@@ -15,7 +15,7 @@ function ForgotPassword() {
 
   return (
     <form
-      className="flex flex-col gap-5 rounded-xl border border-gray-300 bg-gray-50 px-5 py-6 font-light text-gray-600"
+      className="flex flex-col gap-5 rounded-xl border border-gray-300 bg-gray-50 px-5 py-6 font-light text-gray-600 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300"
       onSubmit={handleSubmit}
     >
       <h1 className="text-2xl font-light">Forgot Password</h1>
@@ -29,7 +29,7 @@ function ForgotPassword() {
           placeholder="Enter your email address"
           onChange={(e) => setEmail(e.target.value)}
           disabled={isLoading}
-          className="w-80 rounded-lg border border-gray-200 p-2 outline-teal-400"
+          className="w-80 rounded-lg border border-gray-200 p-2 outline-teal-400 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300 dark:outline-gray-600"
         />
       </div>
       <div className="flex flex-row items-center justify-between">
