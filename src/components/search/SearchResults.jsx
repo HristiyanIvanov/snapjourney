@@ -14,13 +14,15 @@ function SearchResults() {
   };
 
   return (
-    <SearchResultsUI
-      query={query}
-      isLoading={isLoading}
-      users={users}
-      handleUserClick={handleUserClick}
-      goBack={() => navigate(-1)}
-    />
+    <div className="h-screen">
+      <SearchResultsUI
+        query={query}
+        isLoading={isLoading}
+        users={users}
+        handleUserClick={handleUserClick}
+        goBack={() => navigate(-1)}
+      />
+    </div>
   );
 }
 
