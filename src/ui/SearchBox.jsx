@@ -10,7 +10,7 @@ function SearchBox({
   onViewAll,
 }) {
   return (
-    <div className="relative mx-auto w-[100%]">
+    <div className="relative mx-auto w-[90%]">
       <div className="flex items-center rounded-lg border border-gray-300 bg-white p-3 shadow-sm focus-within:border-teal-500 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300 dark:shadow-gray-900/50">
         <GoSearch className="ml-2 text-gray-500" />
         <input

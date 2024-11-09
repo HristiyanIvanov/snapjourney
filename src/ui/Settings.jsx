@@ -23,7 +23,7 @@ const Settings = ({
   handleSubmit,
 }) => {
   return (
-    <div className="mx-auto w-[70%] space-y-6 rounded-lg border border-gray-300 bg-white p-6 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300">
+    <div className="mx-auto max-w-[70%] space-y-6 rounded-lg border border-gray-300 bg-white p-6 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300">
       <h2 className="text-center text-2xl font-semibold">Settings</h2>
 
       <form onSubmit={handleSubmit} className="space-y-4">

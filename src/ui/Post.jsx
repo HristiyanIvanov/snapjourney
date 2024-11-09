@@ -35,7 +35,7 @@ function Post(
   return (
     <div
       ref={ref}
-      className="flex w-[100%] flex-col gap-5 rounded-xl border border-gray-300 bg-gray-50 px-5 py-6 font-light text-gray-600 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300"
+      className="flex max-w-[90%] flex-col gap-5 rounded-xl border border-gray-300 bg-gray-50 px-5 py-6 font-light text-gray-600 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300"
     >
       <div className="flex flex-row items-center justify-between gap-2">
         <div className="group flex flex-row items-center gap-2">
