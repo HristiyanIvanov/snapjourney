@@ -1,7 +1,7 @@
 import { useSearchParams } from "react-router-dom";
 import { useSearchUsers } from "./useSearchUsers";
 import { useNavigate } from "react-router-dom";
-import SearchResultsUI from "../../ui/SearchResultsUi";
+import SearchResultsUI from "../../ui/SearchResultsUI";
 
 function SearchResults() {
   const [searchParams] = useSearchParams();
