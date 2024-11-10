@@ -1,10 +1,11 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
+import { useLocalStorageState } from "./useLocalStorageState";
 
 export const useDarkMode = () => {
-  const [isDarkMode, setIsDarkMode] = useState(
-    localStorage.getItem("isDarkMode") === "true",
+  const [isDarkMode, setIsDarkMode] = useLocalStorageState(
+    window.matchMedia("(prefers-color-scheme: dark)").matches,
+    "isDarkMode",
   );
-
   useEffect(() => {
     if (isDarkMode) {
       document.body.classList.add("dark");
