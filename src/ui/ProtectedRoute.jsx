@@ -16,7 +16,7 @@ function ProtectedRoute({ children }) {
 
   if (isLoading)
     return (
-      <div className="flex h-screen items-center justify-center bg-gray-100">
+      <div className="flex h-screen items-center justify-center bg-gray-100 dark:bg-gray-900">
         <div className="loader" />
       </div>
     );

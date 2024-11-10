@@ -33,10 +33,10 @@ function App() {
           <Route index element={<Container />} />
         </Route>
 
-        <Route path="login" element={<LoginForm />} />
-        <Route path="signup" element={<RegisterForm />} />
-        <Route path="forgot-password" element={<ForgotPasswordForm />} />
-        <Route path="reset-password" element={<ResetPasswordForm />} />
+        <Route path="/login" element={<LoginForm />} />
+        <Route path="/signup" element={<RegisterForm />} />
+        <Route path="/forgot-password" element={<ForgotPasswordForm />} />
+        <Route path="/reset-password" element={<ResetPasswordForm />} />
       </Routes>
       <Toaster
         position="top-center"

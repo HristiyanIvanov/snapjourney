@@ -61,7 +61,7 @@ export default function getNotificationText(notification, triggerUser) {
       return (
         <>
           <Link
-            to={`/profile=@${triggerUser?.username}`}
+            to={`/profile/${triggerUser?.username}`}
             className="cursor-pointer font-bold text-teal-500 transition-all duration-300 hover:text-teal-600"
           >
             @{triggerUser?.username || "Someone"}

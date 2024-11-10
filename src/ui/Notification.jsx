@@ -15,7 +15,7 @@ function Notification({
 }) {
   return (
     isNotificationsOpen && (
-      <div className="fixed right-0 top-0 z-50 h-[100vh] w-auto overflow-y-scroll border border-gray-300 bg-white p-5 shadow-2xl dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300 dark:shadow-gray-900/50">
+      <div className="fixed right-0 top-0 z-50 h-[100vh] w-auto overflow-y-scroll border border-gray-300 bg-white p-5 shadow-2xl dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300">
         <div className="mb-4 flex flex-row items-center justify-between">
           <h2 className="text-xl font-semibold">Notifications</h2>
           <div
